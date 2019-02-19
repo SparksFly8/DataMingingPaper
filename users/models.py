@@ -16,18 +16,22 @@ class UserProfile(AbstractUser):
     # 生日，可以为空
     birthday = models.DateField(verbose_name=u'生日', null=True, blank=True)
     # 性别 只能男或女，默认男
-    gender = models.CharField(max_length=5,
-                              verbose_name=u'性别',
-                              choices=GENDER_CHOICES,
-                              default='male')
+    gender = models.CharField(
+        max_length=5,
+        verbose_name=u'性别',
+        choices=GENDER_CHOICES,
+        default='male'
+    )
     # 地址
     address = models.CharField(max_length=100, verbose_name=u'地址', default='')
     # 电话
     mobile = models.CharField(max_length=11, verbose_name=u'电话', null=True, blank=True)
     # 头像 默认使用default.png
-    image = models.ImageField(max_length=100,
-                              upload_to='image/%Y/%m',
-                              default=u'image/default.png')
+    image = models.ImageField(
+        max_length=100,
+        upload_to='image/%Y/%m',
+        default=u'image/default.png'
+    )
     # meta信息，即后台栏目名
     class Meta:
         verbose_name = u'用户信息'
@@ -57,9 +61,11 @@ class EmailVerifyRecord(models.Model):
 '''
 class Banner(models.Model):
     title = models.CharField(max_length=100, verbose_name=u'标题')
-    image = models.ImageField(max_length=100,
-                              verbose_name=u'轮播图',
-                              upload_to='banner/%Y/%m')
+    image = models.ImageField(
+        max_length=100,
+        verbose_name=u'轮播图',
+        upload_to='banner/%Y/%m'
+    )
     url = models.URLField(max_length=100, verbose_name=u'访问地址')
     # 默认index很大靠后。想要靠前修改index值。
     index = models.IntegerField(default=100, verbose_name=u'顺序')
