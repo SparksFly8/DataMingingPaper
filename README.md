@@ -2,6 +2,6 @@
 【开发环境】：
 
  1. Python-3.6.6
- 2. Django-1.11.15
+ 2. Django-2.1.7
  3. MySQL-5.7
  4. navicat
