@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 '''
-1.课程信息表
+1.课程信息表我爱你
 '''
 class Course(models.Model):
     DEGREE_CHOICES = (
