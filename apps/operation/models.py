@@ -17,6 +17,8 @@ class UserAsk(models.Model):
     class Meta:
         verbose_name = u'用户咨询'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '咨询人:{}'.format(self.name)
 
 '''
 用户对于课程的评论
@@ -31,6 +33,8 @@ class CourseComments(models.Model):
     class Meta:
         verbose_name = u'课程评论'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '评论者:{}'.format(self.name)
 
 '''
 用户对于课程,机构，讲师的收藏
@@ -44,7 +48,7 @@ class UserFavorite(models.Model):
     # 会涉及四个外键。用户，课程，机构，讲师import
     user = models.ForeignKey(to=UserProfile, verbose_name=u'用户', on_delete=models.CASCADE)
     # 直接保存用户的id.
-    fav_id = models.IntegerField(default=0)
+    fav_id = models.IntegerField(default=0, verbose_name='用户收藏id')
     # 表明收藏的是哪种类型。
     fav_type = models.IntegerField(
         choices=TYPE_CHOICES,
@@ -56,6 +60,8 @@ class UserFavorite(models.Model):
     class Meta:
         verbose_name = u'用户收藏'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '用户id:{}'.format(self.fav_id)
 
 '''
 用户消息表
@@ -75,6 +81,8 @@ class UserMessage(models.Model):
     class Meta:
         verbose_name = u'用户消息'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '消息'
 
 '''
 用户课程表
@@ -88,3 +96,5 @@ class UserCourse(models.Model):
     class Meta:
         verbose_name = u'用户课程'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '课程表'

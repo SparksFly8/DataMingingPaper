@@ -11,11 +11,15 @@ class CityDict(models.Model):
     class Meta:
         verbose_name = u'城市'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '"{}"'.format(self.name)
 '''
 课程机构
 '''
 class CourseOrg(models.Model):
-    name = models.CharField(max_length=50, verbose_name=u'课程名字')
+    name = models.CharField(max_length=50, verbose_name=u'机构名称')
+    # 机构描述，后面会替换为富文本展示
+    desc = models.TextField(verbose_name='机构描述', default='这个机构很懒，什么都没留下来')
     click_nums = models.IntegerField(default=0, verbose_name=u'点击量')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏数')
     image = models.ImageField(
@@ -26,13 +30,14 @@ class CourseOrg(models.Model):
     address = models.CharField(max_length=150, verbose_name=u'机构地址')
     # 一个城市可以有很多课程机构，通过将city设置外键，变成课程机构的一个字段
     # 可以让我们通过机构找到城市
-    city = models.ForeignKey('CityDict', verbose_name=u'所属机构', on_delete=models.CASCADE)
-
+    city = models.ForeignKey('CityDict', verbose_name=u'所在城市', on_delete=models.CASCADE)
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
     class Meta:
         verbose_name = u'课程机构'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return self.name
 '''
 讲师信息
 '''
@@ -44,6 +49,7 @@ class Teacher(models.Model):
     work_years = models.IntegerField(default=0, verbose_name=u'工作年限')
     work_company = models.CharField(max_length=50, verbose_name=u'就职公司')
     work_position = models.CharField(max_length=50, verbose_name=u'公司职位')
+    points = models.CharField(max_length=50, default='无', verbose_name=u'教学特点')
     click_nums = models.IntegerField(default=0, verbose_name=u'点击量')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
@@ -51,3 +57,5 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = u'教师'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '{0}机构的教师{1}'.format(self.org, self.name)

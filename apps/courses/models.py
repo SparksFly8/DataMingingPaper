@@ -13,8 +13,8 @@ class Course(models.Model):
     desc = models.CharField(max_length=300, verbose_name=u'课程描述')
     # TextField允许我们不输入长度。可以输入到无限大。暂时定义为TextFiled，之后更新为富文本
     detail = models.TextField(verbose_name=u'课程详情')
-    degree = models.CharField(max_length=2, choices=DEGREE_CHOICES)
-    learn_times = models.IntegerField(default=0, verbose_name=u'学习时长')
+    degree = models.CharField(max_length=2, verbose_name='难度', choices=DEGREE_CHOICES, default=DEGREE_CHOICES[0][1])
+    learn_times = models.IntegerField(default=0, verbose_name=u'学习时长(分钟)')
     students = models.IntegerField(default=0, verbose_name=u'学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏人数')
     image = models.ImageField(
@@ -28,6 +28,8 @@ class Course(models.Model):
     class Meta:
         verbose_name = u'课程'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '《{}》课程'.format(self.name)
 '''
 2.章节
 '''
@@ -43,6 +45,8 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = u'章节'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '《{}》章节'.format(self.name)
 '''
 3.每章视频
 '''
@@ -54,6 +58,8 @@ class Video(models.Model):
     class Meta:
         verbose_name = u'视频'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '《{}》视频'.format(self.name)
 '''
 4.课程资源
 '''
@@ -70,3 +76,5 @@ class CourseResource(models.Model):
     class Meta:
         verbose_name = u'课程资源'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return '《{}》资源'.format(self.name)
