@@ -70,15 +70,20 @@
                 <h2>帐号登录</h2>
                 <form action="/login/" method="post" autocomplete="off">
                     <input type='hidden' name='csrfmiddlewaretoken' value='mymQDzHWl2REXIfPMg2mJaLqDfaS1sD5' />
-                    <div class="form-group marb20">
+                    <div class="form-group marb20" {% if login_form.errors.username %} errorput {% endif%}>
                         <label>用&nbsp;户&nbsp;名</label>
                         <input name="username" id="account_l" type="text" placeholder="手机号/邮箱" />
                     </div>
-                    <div class="form-group marb8">
+                    <div class="form-group marb8" {% if login_form.errors.password %} errorput {% endif %}>
                         <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
                         <input name="password" id="password_l" type="password" placeholder="请输入您的密码" />
                     </div>
-                    <div class="error btns login-form-tips" id="jsLoginTips"></div>
+                    <div class="error btns login-form-tips" id="jsLoginTips">
+                        {% for key,err_value in login_form.errors.items %}
+                            {{ err_value }}
+                        {% endfor %}
+                        {{ msg }}
+                    </div>
                      <div class="auto-box marb38">
                         <label><input type="checkbox" id="jsAutoLogin"> 自动登录</label>
                         <a class="fr" href="forgetpwd.html">忘记密码？</a>

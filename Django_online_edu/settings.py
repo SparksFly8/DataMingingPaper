@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# 设置邮箱和用户名均可登录
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 
 # Application definition
 
