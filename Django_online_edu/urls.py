@@ -17,11 +17,12 @@ from django.urls import path
 from django.views.generic import TemplateView
 # 导入xadmin，替换admin
 import xadmin
-from users.views import LoginView
+from users.views import LoginView, RegisterView
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     # TemplateView.as_view会将template转换为view
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('login/', LoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
 ]

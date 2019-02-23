@@ -22,6 +22,12 @@ class CustomBackend(ModelBackend):
         except Exception as e:
             return None
 
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'register.html', {})
+    def post(self, request):
+        pass
+
 class LoginView(View):
     # 直接调用get方法免去判断
     def get(self, request):
