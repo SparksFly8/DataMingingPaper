@@ -6,7 +6,7 @@ from users.models import UserProfile
 from django.db.models import Q
 # 基于类实现需要继承的view
 from django.views.generic.base import View
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 # 实现用户名邮箱均可登录
 # 继承ModelBackend类，因为它有方法authenticate，可点进源码查看
@@ -22,9 +22,14 @@ class CustomBackend(ModelBackend):
         except Exception as e:
             return None
 
+'''
+注册功能的view
+'''
 class RegisterView(View):
     def get(self, request):
-        return render(request, 'register.html', {})
+        # 添加验证码
+        register_form = RegisterForm()
+        return render(request, 'register.html', {'register_form':register_form})
     def post(self, request):
         pass
 
