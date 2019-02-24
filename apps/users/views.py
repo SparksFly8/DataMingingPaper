@@ -7,7 +7,7 @@ from users.models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
 # 基于类实现需要继承的view
 from django.views.generic.base import View
-from .forms import LoginForm, RegisterForm, ForgetPwdForm
+from .forms import LoginForm, RegisterForm, ForgetPwdForm, ModifyPwdForm
 from utils.email_send import send_register_email
 
 # 实现用户名邮箱均可登录
@@ -118,3 +118,38 @@ class ForgetPwdView(View):
             return render(request, 'send_success.html')
         else:
             return render(request, 'forgetpwd.html', {'forget_form': forget_form})
+
+'''
+重置密码的view
+'''
+class ResetView(View):
+    def get(self, request, reset_code):
+        # 查询邮箱验证记录是否存在
+        all_records = EmailVerifyRecord.objects.filter(code=reset_code)
+        if all_records:
+            for record in all_records:
+                # 将email传回来
+                return render(request, 'password_reset.html', {'email':record.email})
+        else:
+            return render(request, 'active_fail.html')
+
+'''
+重置密码页面中，确认密码的表单提交后的View
+'''
+class ModifyPwdView(View):
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        email = request.POST.get('email', '') # 获取hidden组件post来的邮箱
+        if modify_form.is_valid():
+            pwd1 = request.POST.get('password1', '')
+            pwd2 = request.POST.get('password2', '')
+            # 如果两次密码不相等，返回错误信息
+            if pwd1 != pwd2:
+                return render(request, 'password_reset.html', {'email': email, 'msg':'密码不一致'})
+            user = UserProfile.objects.get(email=email)
+            # 加密成密文存入password字段中
+            user.password = make_password(pwd1)
+            user.save()
+            return render(request, 'login.html', {'msg':'修改密码成功，请重新登录'})
+        else:
+            return render(request, 'password_reset.html', {'email': email, 'modify_form':modify_form})

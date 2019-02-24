@@ -17,7 +17,7 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 # 导入xadmin，替换admin
 import xadmin
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
 
 
 urlpatterns = [
@@ -29,5 +29,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     # 这里的'P'是参数(parameter)的意思;'.*'代表全部提取的正则
     re_path('active/(?P<active_code>.*)/', ActiveUserView.as_view(), name='user_active'),
-    path('forgetPwd/', ForgetPwdView.as_view(), name='forget_pwd')
+    re_path('reset/(?P<reset_code>.*)/', ResetView.as_view(), name='reset_pwd'),
+    path('forgetPwd/', ForgetPwdView.as_view(), name='forget_pwd'),
+    path('modifyPwd/', ModifyPwdView.as_view(), name='modify_pwd'),
 ]
