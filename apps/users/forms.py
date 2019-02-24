@@ -6,6 +6,9 @@ from django import forms
 # 引入验证码field
 from captcha.fields import CaptchaField
 
+'''
+登录form
+'''
 class LoginForm(forms.Form):
     username = forms.CharField(required=True)
     password = forms.CharField(required=True, min_length=5)
@@ -18,4 +21,13 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True,min_length=5)
     # 应用验证码
-    captcha = CaptchaField()
+    captcha = CaptchaField(error_messages={'invalid':'验证码错误'})
+
+'''
+找回密码form
+'''
+class ForgetPwdForm(forms.Form):
+    # 此处email与前端name需保持一致
+    email = forms.EmailField(required=True)
+    # 应用验证码
+    captcha = CaptchaField(error_messages={'invalid':'验证码错误'})

@@ -140,3 +140,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# 发送邮件的setting设置
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_POST = '25'
+EMAIL_HOST_USER = 'testdjango_edu@163.com'
+EMAIL_HOST_PASSWORD = 'admin1234' # 这里不是邮箱登录密码，而是授权码
+EMAIL_USE_TLS= False
+EMAIL_FROM = 'testdjango_edu@163.com'
