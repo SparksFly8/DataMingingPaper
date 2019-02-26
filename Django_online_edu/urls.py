@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
+from django.views.static import serve
 # 导入xadmin，替换admin
 import xadmin
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
 from organization.views import OrgView
+from Django_online_edu.settings import MEDIA_ROOT
 
 
 urlpatterns = [
@@ -31,6 +33,8 @@ urlpatterns = [
     # 这里的'P'是参数(parameter)的意思;'.*'代表全部提取的正则
     re_path('active/(?P<active_code>.*)/', ActiveUserView.as_view(), name='user_active'),
     re_path('reset/(?P<reset_code>.*)/', ResetView.as_view(), name='reset_pwd'),
+    # 处理图片显示的url,使用Django自带serve,传入参数告诉它去哪个路径找，我们有配置好的路径MEDIAROOT
+    re_path('media/(?P<path>.*)', serve, {'document_root':MEDIA_ROOT}),
     path('forgetPwd/', ForgetPwdView.as_view(), name='forget_pwd'),
     path('modifyPwd/', ModifyPwdView.as_view(), name='modify_pwd'),
     # 课程机构首页

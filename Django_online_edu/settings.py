@@ -72,11 +72,14 @@ TEMPLATES = [
         ,
         'APP_DIRS': True,
         'OPTIONS': {
+            # 上下文处理器
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 添加图片处理器，为了使MEDIA_URL添加到课程机构的列表前面中
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -148,3 +151,7 @@ EMAIL_HOST_USER = 'testdjango_edu@163.com'
 EMAIL_HOST_PASSWORD = 'admin1234' # 这里不是邮箱登录密码，而是授权码
 EMAIL_USE_TLS= False
 EMAIL_FROM = 'testdjango_edu@163.com'
+
+# 设置我们上传文件的路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

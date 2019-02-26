@@ -13,8 +13,7 @@ class CityDictAdmin(object):
 
 # 机构课程信息管理器
 class CourseOrgAdmin(object):
-    list_display = ['name', 'desc', 'click_nums', 'fav_nums',
-                    'image', 'address', 'city', 'add_time']
+    list_display = ['name', 'desc', 'click_nums', 'fav_nums']
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city']
     # __name代表使用外键中name字段
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums',

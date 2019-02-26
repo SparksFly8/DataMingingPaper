@@ -17,14 +17,21 @@ class CityDict(models.Model):
 课程机构
 '''
 class CourseOrg(models.Model):
+    CHOICES = (
+        ('pxorg', '培训机构'),
+        ('gx', '高校'),
+        ('gr', '个人'),
+    )
     name = models.CharField(max_length=50, verbose_name=u'机构名称')
     # 机构描述，后面会替换为富文本展示
     desc = models.TextField(verbose_name='机构描述', default='这个机构很懒，什么都没留下来')
+    # 机构类别:
+    category = models.CharField(max_length=20, verbose_name='机构类别', choices=CHOICES, default='pxorg')
     click_nums = models.IntegerField(default=0, verbose_name=u'点击量')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏数')
     image = models.ImageField(
         max_length=100,
-        verbose_name=u'封面图',
+        verbose_name=u'Logo',
         upload_to='org/%Y/%m'
     )
     address = models.CharField(max_length=150, verbose_name=u'机构地址')

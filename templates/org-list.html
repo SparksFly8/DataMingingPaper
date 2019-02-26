@@ -39,52 +39,14 @@
 					<div class="more">更多</div>
 					<div class="cont">
                         <a href="?order_by=&price=all"><span class="active">全部</span></a>
-
-                            <a href="?district=1&price=all"><span >北京市</span></a>
-
-                            <a href="?district=2&price=all"><span >成都市</span></a>
-
-                            <a href="?district=2&price=all"><span >上海市</span></a>
-
-                            <a href="?district=4&price=all"><span >广州市</span></a>
-
-                            <a href="?district=5&price=all"><span >深圳市</span></a>
-
-                            <a href="?district=6&price=all"><span >杭州市</span></a>
-
-                            <a href="?district=7&price=all"><span >武汉市</span></a>
-
-                            <a href="?district=8&price=all"><span >长沙市</span></a>
-
-                            <a href="?district=9&price=all"><span >南京市</span></a>
-
-                            <a href="?district=10&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=11&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=12&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=13&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=14&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=15&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=16&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=17&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=18&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=19&price=all"><span >合肥市</span></a>
-
-                            <a href="?district=20&price=all"><span >合肥市</span></a>
-
+                            {% for city in all_cities %}
+                                <a href="?district=1&price=all"><span >{{ city.name }}</span></a>
+                            {% endfor %}
 					</div>
 				</li>
 			</ul>
 		</div>
-		<div class="all">共<span class="key">10</span>家</div>
+		<div class="all">共<span class="key">{{ org_nums }}</span>家</div>
 		<div class="butler_list company list">
 		<div class="layout">
 			<div class="head">
@@ -94,17 +56,17 @@
 					<li ><a href="?district=&price=all&order_by=most_contract">课程数 &#8595;</a></li>
 				</ul>
 			</div>
-
-                <dl class="des difdes">
+                {% for org in all_orgs %}
+                    <dl class="des difdes">
                     <dt>
                         <a href="org-detail-homepage.html">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/qhdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
+                            <img width="200" height="120" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ org.image }}" src="{% static 'images/pixel.gif' %}"/>
                         </a>
                     </dt>
                     <dd>
                         <div class="clearfix">
                              <a href="org-detail-homepage.html">
-                                 <h1>清华大学</h1>
+                                 <h1>{{ org.name }}</h1>
                                  <div class="pic fl">
 
                                          <img src="{% static 'images/authentication.png' %}"/>
@@ -128,320 +90,7 @@
                     </dd>
                     <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
                 </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/bjdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>北京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">北京市海淀区中关村北大街</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/njdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>南京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">南京市鼓楼区</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/qhdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>清华大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">北京市海淀区中关村北大街</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/bjdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>北京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">北京市海淀区中关村北大街</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/njdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>南京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">南京市鼓楼区</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/qhdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>清华大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">北京市海淀区中关村北大街</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/bjdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>北京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">北京市海淀区中关村北大街</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/njdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>南京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">南京市鼓楼区</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
-
-                <dl class="des difdes">
-                    <dt>
-                        <a href="/company/22/">
-                            <img width="200" height="120" class="scrollLoading" data-url="{% static 'images/njdx.jpg' %}" src="{% static 'images/pixel.gif' %}"/>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="clearfix">
-                             <a href="org-detail-homepage.html">
-                                 <h1>南京大学</h1>
-                                 <div class="pic fl">
-
-                                         <img src="{% static 'images/authentication.png' %}"/>
-
-                                         <img src="{% static 'images/gold.png' %}"/>
-
-                                 </div>
-                             </a>
-                        </div>
-                        <ul class="cont">
-                            <li class="first"><p class="pic9">课程数：<span>1</span></p><p class="c7">学习人数：<span>1000</span></p></li>
-                            <li class="c8" style="padding-left:18px;">南京市鼓楼区</li>
-                            <li class="pic10" style="padding-left:18px;">经典课程：
-
-                                    <a href="/diary/19/">c语言基础入门</a>
-
-                                    <a href="/diary/16/">数据库基础</a>
-
-                            </li>
-                        </ul>
-                    </dd>
-                    <div class="buy start_groupbuy jsShowPerfect2" data-id="22"><br/>联系<br/>服务</div>
-                </dl>
+                {% endfor %}
 		</div>
 		 <div class="pageturn">
             <ul class="pagelist">
