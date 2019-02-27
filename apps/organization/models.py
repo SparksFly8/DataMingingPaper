@@ -38,6 +38,8 @@ class CourseOrg(models.Model):
     # 一个城市可以有很多课程机构，通过将city设置外键，变成课程机构的一个字段
     # 可以让我们通过机构找到城市
     city = models.ForeignKey('CityDict', verbose_name=u'所在城市', on_delete=models.CASCADE)
+    students = models.IntegerField(default=0, verbose_name=u'学习人数')
+    course_nums = models.IntegerField(default=0, verbose_name=u'课程数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
 
     class Meta:
