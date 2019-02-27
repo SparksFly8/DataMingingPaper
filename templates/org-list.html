@@ -134,10 +134,11 @@
                 </div>
 				<div>
                     <img src="{% static 'images/rightform3.png' %}"/>
-                    <input type="text" name="address" id="companyAddress" placeholder="课程名" maxlength="50" />
+                    <input type="text" name="course_name" id="companyAddress" placeholder="课程名" maxlength="50" />
                 </div>
                 <p class="error company-tips" id="jsCompanyTips"></p>
 				<input class="btn" type="text" id="jsStayBtn" value="立即咨询 >" />
+                {% csrf_token %}
             </form>
 		</div>
 
@@ -145,14 +146,85 @@
 			<div class="head">授课机构排名</div>
                 {% for current_org in hot_orgs %}
                     <dl class="des">
-                    <dt class="num fl">{{ forloop.counter }}</dt>
-                    <dd>
-                        <a href="/company/2/"><h1>{{ current_org.name }}</h1></a>
-                        <p>{{ current_org.address }}</p>
-                    </dd>
-                </dl>
+                        <dt class="num fl">{{ forloop.counter }}</dt>
+                        <dd>
+                            <a href="/company/2/"><h1>{{ current_org.name }}</h1></a>
+                            <p>{{ current_org.address }}</p>
+                        </dd>
+                    </dl>
                 {% endfor %}
 		</div>
         </div>
 </section>
+{% endblock %}
+
+
+{% block custom_js %}
+{#<script>#}
+{#    $(function(){#}
+{#        $('#jsStayBtn').on('click', function(){#}
+{#            $.ajax({#}
+{#                cache: false,#}
+{#                type: "POST",#}
+{#                url:"{% url "org:add_ask" %}",#}
+{#                data:$('#jsStayForm').serialize(),#}
+{#                async: true,#}
+{#                success: function(data) {#}
+{#                    if(data.status == 'success'){#}
+{#                        $('#jsStayForm')[0].reset();#}
+{#                        alert("提交成功")#}
+{#                    }else {#}
+{#                        $('#jsCompanyTips').html(data.msg).show()#}
+{#                    }#}
+{#                },#}
+{#            });#}
+{#        });#}
+{#    })#}
+{#</script>#}
+
+<script>
+    $(function(){
+        $('#jsStayBtn').on('click', function(){
+            var _this = $(this);
+            verify = verifyDialogSubmit(
+                [
+                    {id: '#companyName', tips: Dml.Msg.epComName, errorTips:'', require: true},
+                    {id: '#companyMobile', tips: Dml.Msg.epPhone, errorTips: Dml.Msg.erPhone, regName: 'phone', require: true},
+                    {id: '#companyAddress', tips: Dml.Msg.epComAddress,require: true}
+                ]
+            );
+            if(!verify){
+               return;
+            }
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url "org:add_ask" %}",
+                data:$('#jsStayForm').serialize(),
+                async: true,
+                beforeSend:function(xhr, settings){
+                    _this.val("提交成功")
+                    _this.attr("disabled","disabled");
+                    xhr.setRequestHeader("X-CSRFToken", "mymQDzHWl2REXIfPMg2mJaLqDfaS1sD5");
+                },
+                success: function(data) {
+                    if(data.status == 'success'){
+                        $('#jsStayForm')[0].reset();
+                        Dml.fun.showTipsDialog({
+                            title:'提交成功',
+                            h2:'您的学习咨询申请提交成功!',
+                        });
+                        Dml.fun.winReload();
+                    }else if(data.status == 'fail'){
+                        $('#jsCompanyTips').html(data.msg).show();
+                    }
+                },
+                complete: function(XMLHttpRequest){
+                    _this.val("立即咨询 >");
+                    _this.removeAttr("disabled");
+                }
+            });
+        });
+    })
+</script>
 {% endblock %}
