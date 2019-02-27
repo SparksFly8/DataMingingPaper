@@ -50,8 +50,15 @@ INSTALLED_APPS = [
     'crispy_forms',
     'extra_apps',
     'captcha',
+    'pure_pagination',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
+
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 10, # 总共会显示多少个page。(包括省略号，包括两边和中间)
+    'MARGIN_PAGES_DISPLAYED': 2, # 旁边会显示多少个page。
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True, # 当输入页数不合法是否要跳到第一页
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
