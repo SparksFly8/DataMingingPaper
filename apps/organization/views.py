@@ -67,3 +67,66 @@ class AddUserAskView(View):
         else:
             # 如果保存失败，返回json字符串,并将form的报错信息通过msg传递到前端
             return HttpResponse("{'status':'fail','msg':'添加出错'}", content_type='application/json')
+
+'''
+机构首页
+'''
+class OrgHomeView(View):
+    def get(self, request, org_id):
+        current_page = 'home'
+        # 根据id取到课程机构
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        # 通过课程机构找到课程和教师。内建的变量class_set，找到指向这个字段的外键引用
+        all_courses = course_org.course_set.all()[:3]
+        all_teachers = course_org.teacher_set.all()[:1]
+        return render(request, 'org-detail-homepage.html', {
+            'all_courses': all_courses,
+            'all_teachers': all_teachers,
+            'course_org': course_org,
+            'current_page': current_page,
+        })
+
+'''
+机构课程列表页
+'''
+class OrgCourseView(View):
+    def get(self, request, org_id):
+        current_page = 'course'
+        # 根据id取到课程机构
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        # 通过课程机构找到课程和教师。内建的变量class_set，找到指向这个字段的外键引用
+        all_courses = course_org.course_set.all()
+        return render(request, 'org-detail-course.html', {
+            'all_courses': all_courses,
+            'course_org': course_org,
+            'current_page': current_page,
+        })
+
+'''
+机构描述详情页
+'''
+class OrgDescView(View):
+    def get(self, request, org_id):
+        current_page = 'desc'
+        # 根据id取到课程机构
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        return render(request, 'org-detail-desc.html', {
+            'course_org': course_org,
+            'current_page': current_page,
+        })
+
+'''
+机构讲师列表页
+'''
+class OrgTeacherView(View):
+    def get(self, request, org_id):
+        current_page = 'teacher'
+        # 根据id取到课程机构
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        # 通过课程机构找到课程和教师。内建的变量class_set，找到指向这个字段的外键引用
+        all_teachers = course_org.teacher_set.all()
+        return render(request, 'org-detail-teachers.html', {
+            'all_teachers': all_teachers,
+            'course_org': course_org,
+            'current_page': current_page,
+        })

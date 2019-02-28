@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from organization.models import CourseOrg
 '''
 1.课程信息表
 '''
@@ -9,6 +10,8 @@ class Course(models.Model):
         ('zj',u'中级'),
         ('gj',u'高级'),
     )
+    # 新增外键字段应该null = true, blank = true,因为没设默认值
+    course_org = models.ForeignKey(CourseOrg, on_delete=models.CASCADE, verbose_name=u"所属机构", null=True, blank=True)
     name = models.CharField(max_length=50, verbose_name=u'课程名称')
     desc = models.CharField(max_length=300, verbose_name=u'课程描述')
     # TextField允许我们不输入长度。可以输入到无限大。暂时定义为TextFiled，之后更新为富文本
@@ -29,7 +32,7 @@ class Course(models.Model):
         verbose_name = u'课程'
         verbose_name_plural = verbose_name
     def __str__(self):
-        return '《{}》课程'.format(self.name)
+        return self.name
 '''
 2.章节
 '''
@@ -46,7 +49,7 @@ class Lesson(models.Model):
         verbose_name = u'章节'
         verbose_name_plural = verbose_name
     def __str__(self):
-        return '《{}》章节'.format(self.name)
+        return self.name
 '''
 3.每章视频
 '''
@@ -59,7 +62,7 @@ class Video(models.Model):
         verbose_name = u'视频'
         verbose_name_plural = verbose_name
     def __str__(self):
-        return '《{}》视频'.format(self.name)
+        return self.name
 '''
 4.课程资源
 '''
@@ -77,4 +80,4 @@ class CourseResource(models.Model):
         verbose_name = u'课程资源'
         verbose_name_plural = verbose_name
     def __str__(self):
-        return '《{}》资源'.format(self.name)
+        return self.name
