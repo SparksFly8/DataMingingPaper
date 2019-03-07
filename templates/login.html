@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
-	<title>慕学在线网登录</title>
+	<title>文献挖掘系统在线登录</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
@@ -37,11 +37,11 @@
 <header>
     <div class="c-box fff-box">
         <div class="wp header-box">
-            <p class="fl hd-tips">慕学在线网，在线学习平台！</p>
+            <p class="fl hd-tips">文献数据挖掘系统，在线展示平台！</p>
             <ul class="fr hd-bar">
-                <li>服务电话：<span>33333333</span></li>
-                <li class="active"><a href="login.html">[登录]</a></li>
-                <li><a href="register.html">[注册]</a></li>
+                <li>服务邮箱：<span>shiliang6402@foxmail.com</span></li>
+                <li class="active"><a href="{% url 'login' %}">[登录]</a></li>
+                <li><a href="{% url 'register' %}">[注册]</a></li>
             </ul>
         </div>
     </div>
@@ -50,9 +50,9 @@
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="hd-login clearfix">
-                <a class="index-logo" href="/"></a>
-                <h1>用户登录</h1>
-                <a class="index-font" href="{% url 'index' %}">回到首页</a>
+{#                <a class="index-logo" href="/"></a>#}
+                <h1>用&nbsp;&nbsp;户&nbsp;&nbsp;登&nbsp;&nbsp;录</h1>
+                <a class="index-font" href="{% url 'homepage' %}">回到首页</a>
             </div>
             <div class="fl slide">
                 <div class="imgslide">
@@ -90,7 +90,7 @@
                      <input class="btn btn-green" id="jsLoginBtn" type="submit" value="立即登录 > " />
                 {% csrf_token %}
                 </form>
-                <p class="form-p">没有慕学在线网帐号？<a href="register.html">[立即注册]</a></p>
+                <p class="form-p">没有本系统在线网帐号？<a href="{% url 'register' %}">[立即注册]</a></p>
             </div>
         </div>
     </div>

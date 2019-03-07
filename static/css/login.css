@@ -56,8 +56,8 @@ a:hover{
     line-height:68px;
     margin-bottom:15px;
     padding-top:32px;
-    padding-left:190px;
-    background:url(../images/logo.png) no-repeat 0 center;
+    padding-left:40px;
+    background:no-repeat 0 center;
 }
 .index-logo{
     position:absolute;

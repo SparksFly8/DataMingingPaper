@@ -1,0 +1,75 @@
+{% extends 'homepage_base.html' %}
+{% load staticfiles %}
+{% block title %}文献数据挖掘系统首页{% endblock %}
+{# 中部展示位置 #}
+{% block pageMiddle %}
+<section>
+	<div class="wp list personal_list comp">
+		<div class="left">
+			<ul>
+				<li class="{% ifequal current_page 'home' %}active2{% endifequal %}"><a href="#distribute">论文发表机构国家分布</a></li>
+                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a href="">AAAI会议中稿率</a></li>
+                <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a href="">作者统计</a></li>
+                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">词云图</a></li>
+                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">接受率(AAAI 2018)</a></li>
+			</ul>
+		</div>
+        {% block right_form %}
+        <div class="right companycenter layout grouping" >
+            <div class="head">
+                <h1>AAAI 2018</h1>
+            </div>
+            <div class="brief group_list">
+                    <div class="module1_5 box">
+                        <div class="bottom">
+                            <span class="fl"><h2 id="distribute">论文发表机构国家分布</h2></span>
+                        </div>
+                        <a href="{% url 'statistic:affDistribute' %}"><img width="100%" src="{% static 'images/distribute_bar.png' %}"/></a>
+                    </div>
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2>AAAI会议中稿率</h2></span>
+                            </div>
+                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                        </div>
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2>机构统计</h2></span>
+                            </div>
+                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                        </div>
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2>机构统计</h2></span>
+                            </div>
+                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                        </div>
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2>机构统计</h2></span>
+                            </div>
+                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                        </div>
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2>机构统计</h2></span>
+                            </div>
+                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                        </div>
+            </div>
+        </div>
+        <div class="right companycenter layout" >
+            <div class="head">
+                <h1>系统介绍</h1>
+            </div>
+            <div class="cont">&nbsp;&nbsp;&nbsp;本系统通过对AAAI历年会议论文的数据挖掘和分析，运用科学计量、大数据统计、人工分
+                析等方法，结合文献主题、机构、作者、被引频次等相关指标进行聚类和去重，综合分析出相关科技前沿领域的专家、
+                机构等的学术影响力，作为寻找研究前沿和建立国内外各领域专家库的基础评判标准，为国内外学院、机构、政府的项
+                目支撑、人才选拔、专家评定、项目审批、技术发展方向的确定、国家科技决策支持工作带来了科学、客观、公正的重
+                要支撑。
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</section>
+{% endblock %}

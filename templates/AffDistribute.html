@@ -1,0 +1,214 @@
+{% extends 'homepage_base.html' %}
+{% load staticfiles %}
+{% block title %}机构分布统计{% endblock %}
+{% block custom_js %}
+    {#1.引入echarts.js#}
+    <script src="{% static 'js/echarts.js' %}"></script>
+{% endblock %}
+{% block pageMiddle %}
+    {#2.为ECharts准备一个具备大小(宽高)的DOM #}
+    <div class="fream">
+        <div id="pie_left" class="ecahrts-pie-left"></div>
+        <div id="pie_right" class="ecahrts-pie-right"></div>
+    </div>
+    <div id="bar_bottom" style="height: 500px;width: 1200px"></div>
+    {#左图饼图#}
+    <script type="text/javascript">
+        {#3.基于准备好的dom，初始化echarts实例#}
+        var mychart = echarts.init(document.getElementById('pie_left'));
+        {#4.指定图表的option和data#}
+        var option = {
+            title : {
+                text: '2018年所属机构论文投递数',
+                subtext: 'AAAI论文投递数排名top10所属机构国家分布图',
+                x:'center',
+                textStyle:{
+                    fontSize:25,
+                },
+                subtextStyle:{
+                    fontSize:18,
+                },
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                right: '1%',
+                data: ['中国','美国','英国','澳大利亚','新加坡',
+                       '日本','中国香港','印度','加拿大','德国',
+                       '韩国','以色列','意大利'],
+                selected: {'以色列':0,'意大利':0},
+            },
+            series : [
+                {
+                    name: '论文统计',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['48%', '60%'],
+                    data:[
+                        {value:1242, name:'中国'},
+                        {value:934, name:'美国'},
+                        {value:128, name:'英国'},
+                        {value:124, name:'澳大利亚'},
+                        {value:109, name:'新加坡'},
+                        {value:99, name:'日本'},
+                        {value:92, name:'中国香港'},
+                        {value:96, name:'印度'},
+                        {value:68, name:'加拿大'},
+                        {value:68, name:'德国'},
+                        {value:60, name:'韩国'},
+                        {value:43, name:'以色列'},
+                        {value:34, name:'意大利'},
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        mychart.setOption(option);
+    </script>
+    {#右图饼图#}
+    <script type="text/javascript">
+        {#3.基于准备好的dom，初始化echarts实例#}
+        var mychart = echarts.init(document.getElementById('pie_right'));
+        {#4.指定图表的option和data#}
+        var option = {
+            title : {
+                text: '2018年所属机构论文接收数',
+                subtext: 'AAAI论文所属机构接收数排名top10国家分布图',
+                x:'center',
+                textStyle:{
+                    fontSize:25,
+                },
+                subtextStyle:{
+                    fontSize:18,
+                },
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                right: '1%',
+                data: ['美国','中国','新加坡','中国香港','澳大利亚',
+                       '日本','德国','中国台湾','比利时','印度',
+                       '加拿大','意大利','韩国'],
+                selected: {'意大利':0,'韩国':0},
+            },
+            series : [
+                {
+                    name: '论文统计',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['48%', '60%'],
+                    data:[
+                        {value:268, name:'美国'},
+                        {value:265, name:'中国'},
+                        {value:40, name:'新加坡'},
+                        {value:32, name:'中国香港'},
+                        {value:32, name:'澳大利亚'},
+                        {value:30, name:'日本'},
+                        {value:28, name:'德国'},
+                        {value:26, name:'中国台湾'},
+                        {value:19, name:'比利时'},
+                        {value:17, name:'印度'},
+                        {value:16, name:'加拿大'},
+                        {value:14, name:'意大利'},
+                        {value:14, name:'韩国'},
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        mychart.setOption(option);
+    </script>
+    {#下图柱状图#}
+    <script type="text/javascript">
+        {#3.基于准备好的dom，初始化echarts实例#}
+        var mychart = echarts.init(document.getElementById('bar_bottom'));
+        {#4.指定图表的option和data#}
+        mychart.title = '对比柱状图';
+        option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            legend: {
+                data: ['论文接收数','论文投递数']
+            },
+            grid: {
+                show: true,
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis:  {
+                name: '单位/篇',
+                nameLocation: 'center',
+                type: 'value',
+                position: 'top',
+                max: 1510,
+            },
+            yAxis: {
+                name: '国家',
+                type: 'category',
+                data: ['意大利','加拿大','印度','德国','日本','澳大利亚','中国香港','新加坡','中国','美国'],
+            },
+            series: [
+                {
+                    barMinHeight:1,
+                    barWidth: 23,
+                    name: '论文接收数',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight'
+                        }
+                    },
+                    data: [14, 16, 17, 28, 30, 32, 32, 40, 265, 258]
+                },
+                {
+                    name: '论文投递数',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'insideRight'
+                        }
+                    },
+                    data: [34, 69, 76, 68, 99, 128, 92,109,1242,934]
+                },
+            ]
+        };
+        mychart.setOption(option);
+    </script>
+{% endblock %}

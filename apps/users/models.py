@@ -20,7 +20,7 @@ class UserProfile(AbstractUser):
         max_length=6,
         verbose_name=u'性别',
         choices=GENDER_CHOICES,
-        default='male'
+        default='male',
     )
     # 地址
     address = models.CharField(max_length=100, verbose_name=u'地址', default='')
@@ -29,8 +29,8 @@ class UserProfile(AbstractUser):
     # 头像 默认使用default.png
     image = models.ImageField(
         max_length=100,
-        upload_to='image/%Y/%m',
-        default=u'image/default.png'
+        upload_to='media/image/%Y/%m',
+        default='media/image/default/Entity/user_default.png'
     )
     # meta信息，即后台栏目名
     class Meta:
@@ -59,23 +59,3 @@ class EmailVerifyRecord(models.Model):
         verbose_name_plural = verbose_name
     def __str__(self):
         return '{0}({1})'.format(self.code, self.email)
-'''
-轮播图
-'''
-class Banner(models.Model):
-    title = models.CharField(max_length=100, verbose_name=u'标题')
-    image = models.ImageField(
-        max_length=100,
-        verbose_name=u'轮播图',
-        upload_to='banner/%Y/%m'
-    )
-    url = models.URLField(max_length=100, verbose_name=u'访问地址')
-    # 默认index很大靠后。想要靠前修改index值。
-    index = models.IntegerField(default=100, verbose_name=u'顺序')
-    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
-
-    class Meta:
-        verbose_name = u'轮播图'
-        verbose_name_plural = verbose_name
-    def __str__(self):
-        return self.title

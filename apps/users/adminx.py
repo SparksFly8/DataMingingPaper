@@ -4,7 +4,7 @@ __date__ = '2019/2/21 19:28'
 
 import xadmin
 from xadmin import views
-from .models import EmailVerifyRecord, Banner
+from .models import EmailVerifyRecord
 
 # 创建admin的管理类,这里不再是继承admin，而是继承object
 class EmailVerifyRecordAdmin(object):
@@ -15,10 +15,6 @@ class EmailVerifyRecordAdmin(object):
     # 配置筛选字段
     list_filter = ['code', 'email', 'send_type', 'send_time']
 
-class BannerAdmin(object):
-    list_display = ['title', 'image', 'url', 'index', 'add_time']
-    search_fields = ['title', 'image', 'url', 'index']
-    list_filter = ['title', 'image', 'url', 'index', 'add_time']
 
 '''
 创建xadmin的全局管理器并与view绑定。
@@ -33,13 +29,12 @@ xadmin全局配置参数信息设置
 '''
 class GlobalSettings(object):
     site_title = '文献数据挖掘系统管理后台'
-    site_footer = 'Copyright 2019 shiliang, Inc. UCAS.'
+    site_footer = 'Copyright 2019 shiliang, Inc. NXU.'
     # 收起菜单
     menu_style = 'accordion'
 
 
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
-xadmin.site.register(Banner, BannerAdmin)
 # 将全局配置管理与view绑定注册
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 # 将头部与脚部信息进行注册:

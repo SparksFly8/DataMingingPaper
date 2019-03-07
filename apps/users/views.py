@@ -76,7 +76,7 @@ class LoginView(View):
                 # request是要render回去的。这些信息也就随着返回浏览器。完成登录
                 if user.is_active:
                     login(request=request, user=user)
-                    return render(request, 'index.html', )
+                    return render(request, 'homepage.html', )
                 else:
                     return render(request, 'login.html', {'msg': '用户未激活！'})
             else:

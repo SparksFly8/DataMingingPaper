@@ -7,6 +7,32 @@ h1, h2, h3, h4, h5, h6 {
     color: #202020;
 }
 
+.fream{
+    position: relative;
+    width: 1200px;
+    height: 600px;
+    top: 10%;
+    bottom: 10%;
+    left: 1%;
+    right: 1%;
+}
+.ecahrts-pie-left{
+    width: 50%;
+    height: 500px;
+    top: 10%;
+    bottom: 10%;
+    right: 0px;
+    float: left;
+}
+.ecahrts-pie-right{
+    width: 50%;
+    height: 500px;
+    top: 10%;
+    bottom: 10%;
+    left: 0px;
+    float: right;
+}
+
 .col-1 {
     width: 100%;
 }
@@ -1898,7 +1924,9 @@ textarea:focus {
 }
 
 .group_list .box img {
-    height: 190px;
+    position: absolute;
+    top: 41px;
+    height: 400px;
 }
 
 .group_list .des {
@@ -1940,8 +1968,8 @@ textarea:focus {
 
 .group_list .bottom {
     position: absolute;
-    bottom: 0;
-    height: 30px;
+    bottom: 400px;
+    height: 41px;
     width: 100%;
 }
 
@@ -1949,13 +1977,13 @@ textarea:focus {
     background: #f0f0f0;
     display: block;
     height: 100%;
-    line-height: 30px;
+    line-height: 40px;
     text-align: center;
     color: #9f9f9f;
 }
 
 .group_list .bottom .fl {
-    width: 70%;
+    width: 100%;
 }
 
 .group_list .bottom .fr {
@@ -2445,7 +2473,7 @@ textarea:focus {
 
 footer .footer {
     background: #3a3a3a;
-    height: 300px;
+    height: 18px;
     padding: 15px;
     color: #717171;
 }
@@ -5326,10 +5354,10 @@ footer .footer .line {
 }
 
 .companycenter .group_list .box {
-    height: 300px;
+    height: 441px;
     position: relative;
-    margin: 30px 10px;
-    width: 214px !important;
+    margin: 20px 10px;
+    width: 293px !important;
 }
 
 .companycenter .group_list .box .des {

@@ -7,7 +7,7 @@ from users.models import EmailVerifyRecord
 # 导入Django自带的邮件模块
 from django.core.mail import send_mail
 # 导入setting中发送邮件的配置
-from Django_online_edu.settings import EMAIL_FROM
+from DataMingingPaper.settings import EMAIL_FROM
 
 '''
 生成随机字符串
@@ -39,7 +39,7 @@ def send_register_email(email, send_type='register'):
     email_title = ''
     email_body = ''
     if send_type == 'register':
-        email_title = 'Django在线教育网站，注册激活链接.'
+        email_title = 'Django在线文献数据挖掘系统网站，注册激活链接.'
         email_body = '请点击下面的链接激活你的账号: http://127.0.0.1:8000/active/{0}'.format(code)
         # 使用Django内置函数完成邮件发送。四个参数：1.subject,2.message,3.from_email,4.recipient_list
         send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
@@ -47,7 +47,7 @@ def send_register_email(email, send_type='register'):
         if send_status:
             pass
     elif send_type == 'forget':
-        email_title = 'Django在线教育网站，密码重置链接.'
+        email_title = 'Django在线文献数据挖掘系统网站，密码重置链接.'
         email_body = '请点击下面的链接重置你的密码: http://127.0.0.1:8000/reset/{0}'.format(code)
         # 使用Django内置函数完成邮件发送。四个参数：1.subject,2.message,3.from_email,4.recipient_list
         send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
