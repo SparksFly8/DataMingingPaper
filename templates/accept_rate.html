@@ -1,0 +1,99 @@
+{% extends 'homepage_base.html' %}
+{% load staticfiles %}
+{% block title %}AAAI会议中稿率{% endblock %}
+{% block custom_js %}
+    {#1.引入echarts.js#}
+    <script src="{% static 'js/echarts.js' %}"></script>
+{% endblock %}
+{% block pageMiddle %}
+    {#2.为ECharts准备一个具备大小(宽高)的DOM #}
+    <div id="bar_acceptRate" class="bar-wholeScreen"></div>
+    {#下图柱状图#}
+    <script type="text/javascript">
+        {#3.基于准备好的dom，初始化echarts实例#}
+        var mychart = echarts.init(document.getElementById('bar_acceptRate'));
+        {#4.指定图表的option和data#}
+        mychart.title = 'AAAI会议历年论文接收率';
+        option = {
+            title: {
+                text: 'AAAI会议历年中稿率',
+                left:'40%',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                },
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data:['投稿量','录取量','接收率'],
+                orient:'vertical',
+                left:0,
+            },
+            grid: {
+                left: '10%',
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['2010','2011','2012','2013','2014','2015','2016','2017','2018'],
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '投稿量/篇',
+                    min: 0,
+                    max: 4000,
+                    interval: 1000,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '接收率',
+                    min: 0,
+                    max: 35,
+                    interval: 5,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                },
+            ],
+            series: [
+                {
+                    name:'投稿量',
+                    type:'bar',
+                    data:[977, 990, 1129, 690, 1406, 1991, 2143, 2571, 3808]
+                },
+                {
+                    name:'录取量',
+                    type:'bar',
+                    data:[264, 242, 294, 203, 398, 539, 548, 639, 938]
+                },
+                {
+                    name:'接收率',
+                    type:'line',
+                    yAxisIndex: 1,
+                    data:[27.02, 24.44, 26.04, 29.42, 28.31, 27.07, 25.57, 24.85, 24.63]
+                },
+            ]
+        };
+        mychart.setOption(option);
+    </script>
+{% endblock %}

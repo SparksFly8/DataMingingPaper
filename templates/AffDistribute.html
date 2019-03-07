@@ -11,7 +11,7 @@
         <div id="pie_left" class="ecahrts-pie-left"></div>
         <div id="pie_right" class="ecahrts-pie-right"></div>
     </div>
-    <div id="bar_bottom" style="height: 500px;width: 1200px"></div>
+    <div id="bar_bottom" class="bar-wholeScreen"></div>
     {#左图饼图#}
     <script type="text/javascript">
         {#3.基于准备好的dom，初始化echarts实例#}
@@ -146,8 +146,11 @@
             tooltip : {
                 trigger: 'axis',
                 axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
+                    type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                },
             },
             toolbox: {
                 show : true,

@@ -8,7 +8,7 @@
 		<div class="left">
 			<ul>
 				<li class="{% ifequal current_page 'home' %}active2{% endifequal %}"><a href="#distribute">论文发表机构国家分布</a></li>
-                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a href="">AAAI会议中稿率</a></li>
+                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a href="#acceptRate">AAAI会议中稿率</a></li>
                 <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a href="">作者统计</a></li>
                 <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">词云图</a></li>
                 <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">接受率(AAAI 2018)</a></li>
@@ -28,9 +28,9 @@
                     </div>
                     <div class="module1_5 box">
                             <div class="bottom">
-                                <span class="fl"><h2>AAAI会议中稿率</h2></span>
+                                <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
                             </div>
-                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                            <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
                         </div>
                     <div class="module1_5 box">
                             <div class="bottom">

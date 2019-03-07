@@ -8,6 +8,12 @@ from django.views.generic.base import View
 class affDistributeView(View):
     def get(self, request):
         return render(request, 'AffDistribute.html', {})
-    pass
+
+'''
+会议论文接受率View
+'''
+class acceptRateView(View):
+    def get(self, request):
+        return render(request, 'accept_rate.html', {})
 
 
