@@ -50,8 +50,8 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-th{border:1px solid #eaeaea;border-top:0;text-align:center;font-weight: bold;}
-td{border:1px solid #eaeaea;}
+th{border:1px solid #eaeaea;border-top:0;text-align:left;font-weight: bold;}
+td{border:1px}   /*去除单元格硬边框solid #eaeaea*/
 /*input*/
 input,textarea{text-indent:2px;border:1px solid #ccc;}
 input[type="checkbox"], input[type="radio"]{

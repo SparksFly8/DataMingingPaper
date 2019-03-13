@@ -7,6 +7,10 @@ h1, h2, h3, h4, h5, h6 {
     color: #202020;
 }
 
+.center-session {
+    width: 1200px;
+    overflow: hidden;
+}
 .bar-wholeScreen{
     position: relative;
     width: 100%;
@@ -4097,11 +4101,13 @@ footer .footer .line {
 }
 
 .personal_list .left {
+    position: fixed;
     width: 210px;
     float: left;
     background: #f8f8f8;
     border: 1px solid #eaeaea;
     overflow: hidden;
+    transform: translateY(0px);
 }
 
 .personal_list .left li {

@@ -5,13 +5,13 @@
 {% block pageMiddle %}
 <section>
 	<div class="wp list personal_list comp">
-		<div class="left">
+		<div id="list-group" class="left">
 			<ul>
-				<li class="{% ifequal current_page 'home' %}active2{% endifequal %}"><a href="#distribute">论文发表机构国家分布</a></li>
-                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a href="#acceptRate">AAAI会议中稿率</a></li>
-                <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a href="">作者统计</a></li>
-                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">词云图</a></li>
-                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a href="">接受率(AAAI 2018)</a></li>
+				<li><a href="#distribute">论文发表机构国家分布</a></li>
+                <li><a href="#acceptRate">AAAI会议中稿率</a></li>
+                <li><a href="#allsession">会议论文统览</a></li>
+                <li><a href="">词云图</a></li>
+                <li><a href="">接受率(AAAI 2018)</a></li>
 			</ul>
 		</div>
         {% block right_form %}
@@ -20,36 +20,42 @@
                 <h1>AAAI 2018</h1>
             </div>
             <div class="brief group_list">
+                    {#1.#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="distribute">论文发表机构国家分布</h2></span>
                         </div>
                         <a href="{% url 'statistic:affDistribute' %}"><img width="100%" src="{% static 'images/distribute_bar.png' %}"/></a>
                     </div>
+                    {#2.#}
                     <div class="module1_5 box">
                             <div class="bottom">
                                 <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
                             </div>
                             <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
                         </div>
+                    {#3.#}
+                    <div class="module1_5 box">
+                            <div class="bottom">
+                                <span class="fl"><h2 id="allsession">会议论文统览</h2></span>
+                            </div>
+                            <a href="{% url 'statistic:allSession' %}"><img width="100%" src="{% static 'images/all_session.png' %}"/></a>
+                        </div>
+                    {#4.#}
                     <div class="module1_5 box">
                             <div class="bottom">
                                 <span class="fl"><h2>机构统计</h2></span>
                             </div>
                             <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
                         </div>
+                    {#5.#}
                     <div class="module1_5 box">
                             <div class="bottom">
                                 <span class="fl"><h2>机构统计</h2></span>
                             </div>
                             <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
                         </div>
-                    <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2>机构统计</h2></span>
-                            </div>
-                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
-                        </div>
+                    {#6.#}
                     <div class="module1_5 box">
                             <div class="bottom">
                                 <span class="fl"><h2>机构统计</h2></span>
