@@ -1,0 +1,30 @@
+{% extends 'homepage_base.html' %}
+{% load staticfiles %}
+{% block title %}AAAI词云图{% endblock %}
+{% block custom_js %}
+    {#1.引入wordart词云#}
+    <script src="//cdn.wordart.com/wordart.min.js" async defer></script>
+{% endblock %}
+{% block pageMiddle %}
+    <div class="wp list personal_list comp">
+        <div id="list-group" class="left">
+			<ul>
+				<li><a href="#dyWordCloud">AAAI动态词云图</a></li>
+                <li><a href="#stWordCloud">AAAI静态词云图</a></li>
+			</ul>
+		</div>
+        <div class="right companycenter layout grouping" >
+                <div class="head">
+                    <h1 id="dyWordCloud">AAAI动态词云图</h1>
+                </div>
+                <div class="bar-wholeScreen" data-wordart-src="//cdn.wordart.com/json/66j3c7be7hjb" data-wordart-show-attribution></div>
+        </div>
+        <div class="right companycenter layout grouping" >
+                <div class="head">
+                    <h1 id="stWordCloud">AAAI静态词云图</h1>
+                </div>
+                <img style="height: 60%; width: 70%; position: relative; left: 15%" src="{% static 'images/wordcloud.png' %}"/>
+        </div>
+    </div>
+
+{% endblock %}

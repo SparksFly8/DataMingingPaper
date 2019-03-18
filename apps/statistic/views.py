@@ -59,3 +59,10 @@ class sessionDetailView(View):
                 'creatorList': creatorList,
                 'rowkey': row_key,  # 日后可能会用到的参数
             })
+
+'''
+词云图View
+'''
+class wordCloudView(View):
+    def get(self, request):
+        return render(request, 'wordcloud.html', {})

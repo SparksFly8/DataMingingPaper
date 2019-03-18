@@ -10,7 +10,7 @@
 				<li><a href="#distribute">论文发表机构国家分布</a></li>
                 <li><a href="#acceptRate">AAAI会议中稿率</a></li>
                 <li><a href="#allsession">会议论文统览</a></li>
-                <li><a href="">词云图</a></li>
+                <li><a href="#wordcloud">词云图</a></li>
                 <li><a href="">接受率(AAAI 2018)</a></li>
 			</ul>
 		</div>
@@ -44,9 +44,9 @@
                     {#4.#}
                     <div class="module1_5 box">
                             <div class="bottom">
-                                <span class="fl"><h2>机构统计</h2></span>
+                                <span class="fl"><h2 id="wordcloud">词云图</h2></span>
                             </div>
-                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                            <a href="{% url 'statistic:wordcloud' %}"><img width="100%" src="{% static 'images/wordcloud.png' %}"/></a>
                         </div>
                     {#5.#}
                     <div class="module1_5 box">
