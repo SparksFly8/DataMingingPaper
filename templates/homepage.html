@@ -9,9 +9,10 @@
 			<ul>
 				<li><a href="#distribute">论文发表机构国家分布</a></li>
                 <li><a href="#acceptRate">AAAI会议中稿率</a></li>
-                <li><a href="#allsession">会议论文统览</a></li>
-                <li><a href="#wordcloud">词云图</a></li>
-                <li><a href="">接受率(AAAI 2018)</a></li>
+                <li><a href="#allsession">AAAI会议论文统览</a></li>
+                <li><a href="#wordcloud">AAAI词云图</a></li>
+                <li><a href="#author">AAAI作者统计</a></li>
+                <li><a href="#aff">AAAI机构统计</a></li>
 			</ul>
 		</div>
         {% block right_form %}
@@ -51,16 +52,16 @@
                     {#5.#}
                     <div class="module1_5 box">
                             <div class="bottom">
-                                <span class="fl"><h2>机构统计</h2></span>
+                                <span class="fl"><h2 id="author">AAAI作者统计</h2></span>
                             </div>
-                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                            <a href="{% url 'statistic:authorRank' %}"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
                         </div>
                     {#6.#}
                     <div class="module1_5 box">
                             <div class="bottom">
-                                <span class="fl"><h2>机构统计</h2></span>
+                                <span class="fl"><h2 id="aff">AAAI机构统计</h2></span>
                             </div>
-                            <a href="/group/groupdetail/13/"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
+                            <a href="{% url 'statistic:affRank' %}"><img width="100%" src="{% static 'images/sass.jpg' %}"/></a>
                         </div>
             </div>
         </div>

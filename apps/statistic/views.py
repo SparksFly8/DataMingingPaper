@@ -66,3 +66,31 @@ class sessionDetailView(View):
 class wordCloudView(View):
     def get(self, request):
         return render(request, 'wordcloud.html', {})
+
+'''
+作者统计View
+'''
+class authorRankView(View):
+    def get(self, request):
+        tableName = '2018AAAI'  # 数据库表名
+        startRow = '20180001'
+        # 连接HBase数据库，返回客户端实例
+        client = connectHBase()
+        titleCreatorDict = scannerGetSelect(client, tableName, ['paper:title','creator'], startRow)
+        return render(request, 'author_rank.html', {
+            'titleCreatorDict': titleCreatorDict,
+        })
+
+'''
+机构统计View
+'''
+class affRankView(View):
+    def get(self, request):
+        tableName = '2018AAAI'  # 数据库表名
+        startRow = '20180001'
+        # 连接HBase数据库，返回客户端实例
+        client = connectHBase()
+        titleCreatorDict = scannerGetSelect(client, tableName, ['paper:title','creator'], startRow)
+        return render(request, 'aff_rank.html', {
+            'titleCreatorDict': titleCreatorDict,
+        })
