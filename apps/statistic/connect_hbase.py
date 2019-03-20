@@ -148,7 +148,7 @@ def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFa
     # 1.打开所在工作簿
     data = xlrd.open_workbook(xlsx_Path)
     # 2.获取工作簿中的sheet
-    sheet = data.sheets()[2]
+    sheet = data.sheets()[0]
     # 3.获取当前sheet的行数(含表头)
     nRows = sheet.nrows
     # 从第1行遍历到第nRows-1行,tqdm()使用进度条

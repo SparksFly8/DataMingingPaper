@@ -44,9 +44,12 @@
                 <div class="layui-tab-item layui-show">
                     <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
                         <colgroup>
-                            <col width="14%">
-                            <col width="40%">
-                            <col width="27%">
+                            <col width="10%">
+{#                            <col width="14%">#}
+                            <col width="28%">
+                            <col width="15%">
+{#                            <col width="40%">#}
+{#                            <col width="27%">#}
                             <col>
                         </colgroup>
                         {#表头#}
@@ -54,18 +57,18 @@
                             <tr class="info">
                                 <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
                                 <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
-                                <th><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
                                 <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
                             </tr>
                         </thead>
                         {#表格#}
                         {#遍历每一行#}
                         <tbody>
-                            {% for rowkey,dict in author_allDict.items %}
+                            {% for rowkey,dict in aff_allDict.items %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ dict.info.affiliation }}</td>
-                                    <td>{{ dict.info.autName }}</td>
+                                    <td>{{ dict.info.country }}</td>
                                     <td>{{ dict.info.count }}</td>
                                 </tr>
                             {% endfor %}
@@ -86,18 +89,18 @@
                             <tr class="info">
                                 <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
                                 <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
-                                <th><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
                                 <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
                             </tr>
                         </thead>
                         {#表格#}
                         {#遍历每一行#}
                         <tbody>
-                            {% for rowkey,dict in author_allDict.items %}
+                            {% for rowkey,dict in aff_1stDict.items %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ dict.info.affiliation }}</td>
-                                    <td>{{ dict.info.autName }}</td>
+                                    <td>{{ dict.info.country }}</td>
                                     <td>{{ dict.info.count }}</td>
                                 </tr>
                             {% endfor %}

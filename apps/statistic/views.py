@@ -89,14 +89,14 @@ class authorRankView(View):
 '''
 class affRankView(View):
     def get(self, request):
-        tableName_aut_1st = '2018AAAI_author_1st'  # 数据库表名
-        tableName_aut_all = '2018AAAI_author_all'  # 数据库表名
+        tableName_aff_1st = '2018AAAI_aff_1st'  # 数据库表名
+        tableName_aff_all = '2018AAAI_aff_all'  # 数据库表名
         startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        author_1stDict = scannerGetSelect(client, tableName_aut_1st, ['info'], startRow)
-        author_allDict = scannerGetSelect(client, tableName_aut_all, ['info'], startRow)
+        aff_1stDict = scannerGetSelect(client, tableName_aff_1st, ['info'], startRow)
+        aff_allDict = scannerGetSelect(client, tableName_aff_all, ['info'], startRow)
         return render(request, 'aff_rank.html', {
-            'author_1stDict': author_1stDict,
-            'author_allDict': author_allDict,
+            'aff_1stDict': aff_1stDict,
+            'aff_allDict': aff_allDict,
         })
