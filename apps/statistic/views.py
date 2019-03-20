@@ -72,13 +72,16 @@ class wordCloudView(View):
 '''
 class authorRankView(View):
     def get(self, request):
-        tableName = '2018AAAI'  # 数据库表名
+        tableName_aut_1st = '2018AAAI_author_1st'  # 数据库表名
+        tableName_aut_all = '2018AAAI_author_all'  # 数据库表名
         startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        titleCreatorDict = scannerGetSelect(client, tableName, ['paper:title','creator'], startRow)
+        author_1stDict = scannerGetSelect(client, tableName_aut_1st, ['info'], startRow)
+        author_allDict = scannerGetSelect(client, tableName_aut_all, ['info'], startRow)
         return render(request, 'author_rank.html', {
-            'titleCreatorDict': titleCreatorDict,
+            'author_1stDict': author_1stDict,
+            'author_allDict': author_allDict,
         })
 
 '''
@@ -86,11 +89,14 @@ class authorRankView(View):
 '''
 class affRankView(View):
     def get(self, request):
-        tableName = '2018AAAI'  # 数据库表名
+        tableName_aut_1st = '2018AAAI_author_1st'  # 数据库表名
+        tableName_aut_all = '2018AAAI_author_all'  # 数据库表名
         startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        titleCreatorDict = scannerGetSelect(client, tableName, ['paper:title','creator'], startRow)
+        author_1stDict = scannerGetSelect(client, tableName_aut_1st, ['info'], startRow)
+        author_allDict = scannerGetSelect(client, tableName_aut_all, ['info'], startRow)
         return render(request, 'aff_rank.html', {
-            'titleCreatorDict': titleCreatorDict,
+            'author_1stDict': author_1stDict,
+            'author_allDict': author_allDict,
         })

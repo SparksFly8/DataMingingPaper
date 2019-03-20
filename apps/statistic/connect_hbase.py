@@ -70,19 +70,6 @@ def deleteTable(client, tableName):
     client.deleteTable(tableName)
     print('删除表'+tableName+'成功.')
 
-def deleteAllRow(client, tableName, rowKey):
-    '''
-    删除指定表某一行数据
-    :param client: 连接HBase的客户端实例
-    :param tableName: 表名
-    :param rowKey: 行键
-    '''
-    if getRow(client, tableName, rowKey):
-        client.deleteAllRow(tableName, rowKey)
-        print('删除{0}表{1}行成功！'.format(tableName, rowKey))
-    else:
-        print('错误提示：未找到{0}表{1}行数据！'.format(tableName, rowKey))
-
 def insertRow(client, tableName, rowName, colFamily, columnName, value):
     '''
     在指定表指定行指定列簇插入/更新列值
@@ -91,7 +78,7 @@ def insertRow(client, tableName, rowName, colFamily, columnName, value):
     client.mutateRow(tableName, rowName, mutations)
     # print('在{0}表{1}列簇{2}列插入{3}数据成功.'.format(tableName, colFamily, columnName, value))
 
-def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt=2000):
+def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt=3000):
     '''
     依次扫描HBase指定表的每行数据(根据起始行，扫描到表的最后一行或指定行的前一行)
     :param client: 连接HBase的客户端实例
@@ -145,18 +132,6 @@ def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt
     else:
         return []
 
-def bigInt2str(bigNum):
-    '''
-    大整数转换为字符串
-    :param bigNum: 大整数
-    :return string: 转换后的字符串
-    '''
-    string = ''
-    for i in range(len(str(bigNum)),0,-1):
-        a = int(math.pow(10, (i-1)))
-        b = bigNum//a%10
-        string += str(b)
-    return string
 
 def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try, year):
     '''
@@ -173,55 +148,63 @@ def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFa
     # 1.打开所在工作簿
     data = xlrd.open_workbook(xlsx_Path)
     # 2.获取工作簿中的sheet
-    sheet = data.sheets()[0]
+    sheet = data.sheets()[2]
     # 3.获取当前sheet的行数(含表头)
     nRows = sheet.nrows
     # 从第1行遍历到第nRows-1行,tqdm()使用进度条
     for RowNum in tqdm(range(1,nRows)):
         rowName = year+'{:0>4d}'.format(RowNum) # 根据年份和行值拼接成字符串形成rowKey
-        for ColNum in range(2,5):               # 从第2列遍历到第4列
+        for ColNum in range(0,3):               # 从第2列遍历到第4列
             value = sheet.cell(RowNum, ColNum).value   # 单元格信息
+            # 对于发表频数，只保留整数
+            if ColNum == 2:
+                value = int(value)
             if value != '0':
                 header = sheet.cell(0, ColNum).value       # 每列的表头信息
                 insertRow(client, tableName, rowName, colFamily_per, header, value)
                 # print('第'+rowName+'行'+header+'列插入数据成功.')
-        cre_bool = True  # 作者锁
-        aff_bool = True  # 机构锁
-        for ColNum in range(5,47):  # 从第5列遍历到第46列
-            value = sheet.cell(RowNum, ColNum).value   # 单元格信息
-            if value != '0':
-                header = sheet.cell(0, ColNum).value  # 每列的表头信息
-                if cre_bool:   # 只存作者
-                    insertRow(client, tableName, rowName, colFamily_cre, header, value)
-                    cre_bool = False
-                elif aff_bool: # 只存机构
-                    insertRow(client, tableName, rowName, colFamily_aff, header, value)
-                    aff_bool = False
-                else:          # 只存国家
-                    insertRow(client, tableName, rowName, colFamily_try, header, value)
-                    cre_bool = True  # 作者锁
-                    aff_bool = True  # 机构锁
-                # print('第'+rowName+'行'+header+'列插入数据成功.')
+        # cre_bool = True  # 作者锁
+        # aff_bool = True  # 机构锁
+        # for ColNum in range(5,47):  # 从第5列遍历到第46列
+        #     value = sheet.cell(RowNum, ColNum).value   # 单元格信息
+        #     if value != '0':
+        #         header = sheet.cell(0, ColNum).value  # 每列的表头信息
+        #         if cre_bool:   # 只存作者
+        #             insertRow(client, tableName, rowName, colFamily_cre, header, value)
+        #             cre_bool = False
+        #         elif aff_bool: # 只存机构
+        #             insertRow(client, tableName, rowName, colFamily_aff, header, value)
+        #             aff_bool = False
+        #         else:          # 只存国家
+        #             insertRow(client, tableName, rowName, colFamily_try, header, value)
+        #             cre_bool = True  # 作者锁
+        #             aff_bool = True  # 机构锁
+        #         print('第'+rowName+'行'+header+'列插入数据成功.')
 
 
 if __name__ == '__main__':
-    tableName = '2018AAAI' # 数据库表名
-    colFamily_per = 'paper'          # 论文信息列簇
-    colFamily_cre = 'creator'        # 作者列簇
-    colFamily_aff = 'affiliation'    # 机构列簇
-    colFamily_try = 'country'        # 国家列簇
-    xlsx_Path = 'C:\\Users\\Administrator\\Desktop\\whole_data.xlsx'
+    # tableName = '2018AAAI' # 数据库表名
+    tableName = '2018AAAI_aff_1st' # 数据库表名
+    # tableName = '2018AAAI_author_1st' # 数据库表名
+    # colFamily_per = 'paper'          # 论文信息列簇
+    # colFamily_cre = 'creator'        # 作者列簇
+    # colFamily_aff = 'affiliation'    # 机构列簇
+    # colFamily_try = 'country'        # 国家列簇
+    colFamily_aut1st = 'info'          # 论文信息列簇
+    # colFamily_aut1st = 'author_1st'          # 论文信息列簇
+    colFamily_autAll = 'author_all'        # 作者列簇
+    colFamily_aff1st = 'aff_1st'        # 机构列簇
+    colFamily_affAll = 'aff_all'        # 国家列簇
+    xlsx_Path = 'C:\\Users\\Administrator\\Desktop\\data.xlsx'
     year = '2018'
     # 连接HBase数据库，返回客户端实例
     client = connectHBase()
     # xlsx数据上传到HBase中
-    xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try, year)
+    xlsx2HBase(client, xlsx_Path, tableName, colFamily_aut1st, colFamily_autAll, colFamily_aff1st, colFamily_affAll, year)
     # 创建表
-    # createTable(client, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try)
+    # createTable(client, tableName, 'info')
     # 插入或更新列值
     # insertRow(client, tableName, '20180936', 'creator_info', 'affiliation2', 'Ecole Polytechnique Fédérale de Lausanne (EPFL)')
-    # 删除指定表某行数据
-    # deleteAllRow(client, '2018AAAI_Papers', '20181106')
     # 删除整表
     # deleteTable(client, tableName)
     # 依次扫描HBase指定表的每行数据(根据起始行，扫描到表的最后一行或指定行的前一行)
