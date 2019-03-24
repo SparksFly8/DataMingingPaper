@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'statistic',
     'xadmin',
     'crispy_forms',    # 和xadmin协同工作的表单包
     'extra_apps',

@@ -163,23 +163,6 @@ def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFa
                 header = sheet.cell(0, ColNum).value       # 每列的表头信息
                 insertRow(client, tableName, rowName, colFamily_per, header, value)
                 # print('第'+rowName+'行'+header+'列插入数据成功.')
-        # cre_bool = True  # 作者锁
-        # aff_bool = True  # 机构锁
-        # for ColNum in range(5,47):  # 从第5列遍历到第46列
-        #     value = sheet.cell(RowNum, ColNum).value   # 单元格信息
-        #     if value != '0':
-        #         header = sheet.cell(0, ColNum).value  # 每列的表头信息
-        #         if cre_bool:   # 只存作者
-        #             insertRow(client, tableName, rowName, colFamily_cre, header, value)
-        #             cre_bool = False
-        #         elif aff_bool: # 只存机构
-        #             insertRow(client, tableName, rowName, colFamily_aff, header, value)
-        #             aff_bool = False
-        #         else:          # 只存国家
-        #             insertRow(client, tableName, rowName, colFamily_try, header, value)
-        #             cre_bool = True  # 作者锁
-        #             aff_bool = True  # 机构锁
-        #         print('第'+rowName+'行'+header+'列插入数据成功.')
 
 
 if __name__ == '__main__':
