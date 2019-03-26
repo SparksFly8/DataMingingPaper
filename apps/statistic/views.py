@@ -2,13 +2,36 @@ from django.shortcuts import render
 from django.views.generic.base import View
 
 from .connect_hbase import connectHBase, scannerGetSelect
+from .xlsx2mysql2django import connectMySQL, selectCountry
+from .models import AffDistribute
 
 '''
 机构国家分布View
 '''
 class affDistributeView(View):
     def get(self, request):
-        return render(request, 'AffDistribute.html', {})
+        USDict = AffDistribute.objects.all().filter(country='United States')
+        ChinaDict = AffDistribute.objects.all().filter(country='China')
+        SingaporeDict = AffDistribute.objects.all().filter(country='Singapore')
+        HKDict = AffDistribute.objects.all().filter(country='Hong Kong')
+        AustraliaDict = AffDistribute.objects.all().filter(country='Australia')
+        UKDict = AffDistribute.objects.all().filter(country='United Kingdom')
+        JapanDict = AffDistribute.objects.all().filter(country='Japan')
+        GermanyDict = AffDistribute.objects.all().filter(country='Germany')
+        IndiaDict = AffDistribute.objects.all().filter(country='India')
+        CanadaDict = AffDistribute.objects.all().filter(country='Canada')
+        return render(request, 'AffDistribute.html', {
+            'USDict':USDict,
+            'ChinaDict':ChinaDict,
+            'SingaporeDict':SingaporeDict,
+            'HKDict':HKDict,
+            'AustraliaDict':AustraliaDict,
+            'UKDict':UKDict,
+            'JapanDict':JapanDict,
+            'GermanyDict':GermanyDict,
+            'IndiaDict':IndiaDict,
+            'CanadaDict':CanadaDict,
+        })
 
 '''
 会议论文接受率View

@@ -1,6 +1,9 @@
 {% extends 'homepage_base.html' %}
 {% load staticfiles %}
 {% block title %}机构分布统计{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+{% endblock %}
 {% block custom_js %}
     {#1.引入echarts.js#}
     <script src="{% static 'js/echarts.js' %}"></script>
@@ -19,7 +22,7 @@
         <li class="layui-this" lay-id="11">United States</li>
         <li lay-id="22">China</li>
         <li lay-id="33">Singapore</li>
-        <li lay-id="44">Hong Kong</li>
+        <li lay-id="44">Hong Kong(China)</li>
         <li lay-id="55">Australia</li>
         <li lay-id="66">United Kingdom</li>
         <li lay-id="77">Japan</li>
@@ -29,17 +32,315 @@
       </ul>
       <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
-          点击该Tab的任一标题，观察地址栏变化，再刷新页面。选项卡将会自动定位到上一次切换的项
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in USDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="layui-tab-item">内容2</div>
-        <div class="layui-tab-item">内容3</div>
-        <div class="layui-tab-item">内容4</div>
-        <div class="layui-tab-item">内容5</div>
-        <div class="layui-tab-item">内容6</div>
-        <div class="layui-tab-item">内容7</div>
-        <div class="layui-tab-item">内容8</div>
-        <div class="layui-tab-item">内容9</div>
-        <div class="layui-tab-item">内容10</div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in ChinaDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in SingaporeDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in HKDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in AustraliaDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in UKDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in JapanDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in GermanyDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in IndiaDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                <colgroup>
+                    <col width="25%">
+                    <col width="33%">
+                    <col width="24%">
+                    <col>
+                </colgroup>
+                {#表头#}
+                <thead>
+                    <tr class="info">
+                        <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                        <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                        <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                        <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                    </tr>
+                </thead>
+                {#表格#}
+                {#遍历每一行#}
+                <tbody>
+                    {% for result in CanadaDict %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ result.affiliation }}</td>
+                                <td>{{ result.country }}</td>
+                                <td>{{ result.count }}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
       </div>
     </div>
     {#左图饼图#}
