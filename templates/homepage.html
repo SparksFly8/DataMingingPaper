@@ -13,6 +13,7 @@
                 <li><a href="#wordcloud">AAAI词云图</a></li>
                 <li><a href="#author">AAAI作者统计</a></li>
                 <li><a href="#aff">AAAI机构统计</a></li>
+                <li><a href="#au_relationship">AAAI作者关系图谱</a></li>
 			</ul>
 		</div>
         {% block right_form %}
@@ -30,39 +31,46 @@
                     </div>
                     {#2.#}
                     <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
-                            </div>
-                            <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
+                        <div class="bottom">
+                            <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
                         </div>
+                        <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
+                    </div>
                     {#3.#}
                     <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2 id="allsession">会议论文统览</h2></span>
-                            </div>
-                            <a href="{% url 'statistic:allSession' %}"><img width="100%" src="{% static 'images/all_session.png' %}"/></a>
+                        <div class="bottom">
+                            <span class="fl"><h2 id="allsession">会议论文统览</h2></span>
                         </div>
+                        <a href="{% url 'statistic:allSession' %}"><img width="100%" src="{% static 'images/all_session.png' %}"/></a>
+                    </div>
                     {#4.#}
                     <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2 id="wordcloud">词云图</h2></span>
-                            </div>
-                            <a href="{% url 'statistic:wordcloud' %}"><img width="100%" src="{% static 'images/wordcloud.png' %}"/></a>
+                        <div class="bottom">
+                            <span class="fl"><h2 id="wordcloud">词云图</h2></span>
                         </div>
+                        <a href="{% url 'statistic:wordcloud' %}"><img width="100%" src="{% static 'images/wordcloud.png' %}"/></a>
+                    </div>
                     {#5.#}
                     <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2 id="author">AAAI作者统计</h2></span>
-                            </div>
-                            <a href="{% url 'statistic:authorRank' %}"><img width="100%" src="{% static 'images/authorTongJi.png' %}"/></a>
+                        <div class="bottom">
+                            <span class="fl"><h2 id="author">AAAI作者统计</h2></span>
                         </div>
+                        <a href="{% url 'statistic:authorRank' %}"><img width="100%" src="{% static 'images/authorTongJi.png' %}"/></a>
+                    </div>
                     {#6.#}
                     <div class="module1_5 box">
-                            <div class="bottom">
-                                <span class="fl"><h2 id="aff">AAAI机构统计</h2></span>
-                            </div>
-                            <a href="{% url 'statistic:affRank' %}"><img width="100%" src="{% static 'images/affTongJi.png' %}"/></a>
+                        <div class="bottom">
+                            <span class="fl"><h2 id="aff">AAAI机构统计</h2></span>
                         </div>
+                        <a href="{% url 'statistic:affRank' %}"><img width="100%" src="{% static 'images/affTongJi.png' %}"/></a>
+                    </div>
+                    {#6.#}
+                    <div class="module1_5 box">
+                        <div class="bottom">
+                            <span class="fl"><h2 id="au_relationship">AAAI作者关系图谱</h2></span>
+                        </div>
+                        <a href="{% url 'statistic:affRank' %}"><img width="100%" src="{% static 'images/au_relationship.png' %}"/></a>
+                    </div>
             </div>
         </div>
         <div class="right companycenter layout" >
