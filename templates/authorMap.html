@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AAAI论文作者关系图谱</title>
+    <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/svg-pan-zoom.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-Loading.css' %}" />
+    <style>
+        .bar-wholeScreen{
+            position: relative;
+            width: 100%;
+            height: 520px;
+        }
+    </style>
+</head>
+<body>
+    <!--Loading页面,用vh单位表示当前浏览器视窗高度百分比-->
+    <div id="loader" class="bar-wholeScreen" style="height: 100vh">
+		<span class="circle">LOA
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+		<span class="circle">D
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+		<span class="circle">ING
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+	</div>
+    <p style="padding:6px;text-align:left;background-color:#dff0d8">
+        【解释】：本图基于2018AAAI会议作者数据,通过构建数据共现矩阵,
+        得到稀疏矩阵三元组形式,并导入到Gephi软件进行复杂网络可视化得到。<br />
+        ①图中节点越大表示该作者发表论文越多,对该领域的贡献越大;
+        ②图中边越粗则两两作者的合作关系越多,合作关系越密切;
+        ③本图使用力引导布局(基于库伦斥力和胡克弹力算法);
+    </p>
+    <!--1.加载SVG的object方式-->
+    <object data="{% static 'images/network.svg' %}" class="bar-wholeScreen"  onload="zoom(this)"></object>
+    <!--2.加载SVG的embed方式-->
+    <!--<embed src="network.svg" class="bar-wholeScreen"  onload="zoom(this)">-->
+    <script type="text/javascript">
+        function zoom(obj) {
+            $(obj.getSVGDocument().getElementById('node-labels')).show();
+
+            svgPanZoom(obj, {
+                zoomEnabled: true,
+                controlIconsEnabled: true
+            });
+        }
+        $('object').attr('onload', 'zoom(this)');
+    </script>
+    <script>
+        $(window).on('load', function(){
+            $('#loader').hide(0);
+        });
+    </script>
+</body>
+</html>

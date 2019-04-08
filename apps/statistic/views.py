@@ -123,3 +123,10 @@ class affRankView(View):
             'aff_1stDict': aff_1stDict,
             'aff_allDict': aff_allDict,
         })
+
+'''
+作者关系图谱View
+'''
+class authorMapView(View):
+    def get(self, request):
+        return render(request, 'authorMap.html', {})
