@@ -27,14 +27,17 @@
 	<div class="wp list personal_list comp">
         <div id="list-group" class="left">
 			<ul>
-				<li><a href="#2018AAAI">2018年会议</a></li>
-                <li><a href="">2017年会议</a></li>
-                <li><a href="">2016年会议</a></li>
+				<li><a href="#2018AAAI">2018年AAAI会议</a></li>
+                <li><a href="#2017AAAI">2017年AAAI会议</a></li>
+                <li><a href="#2016AAAI">2016年AAAI会议</a></li>
+                <li><a href="#2015AAAI">2015年AAAI会议</a></li>
+                <li><a href="#2014AAAI">2014年AAAI会议</a></li>
 			</ul>
 		</div>
+        {#2018AAAI#}
         <div class="right companycenter layout grouping" >
-            <div class="head">
-                <h1 id="2018AAAI">2018年会议论文</h1>
+            <div id="2018AAAI" class="head">
+                <h1>2018年AAAI会议</h1>
             </div>
             <table class="table table-striped table-hover" style="word-break:break-word">
                 {#表头#}
@@ -45,7 +48,135 @@
                 </tr>
                 {#表格#}
                 {#遍历每一行#}
-                {% for rowkey,dict in titleCreatorDict.items %}
+                {% for rowkey,dict in titleCreDict2018.items %}
+                    <tr>
+                        <td align="center">{{ forloop.counter }}</td>
+                        <td><a href="{% url 'statistic:sessionDetail' rowkey %}" style="color: #666"><b>{{ dict.paper.title }}</b></a></td>
+                        <td>
+                            {#遍历每一列簇,依次输出一作二作..n作#}
+                            {% for colCre,creName in dict.creator.items %}
+                                {% if forloop.last %}
+                                    {{ creName }}
+                                {% else %}
+                                    {{ creName }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {#2017AAAI#}
+        <div class="right companycenter layout grouping" >
+            <div id="2017AAAI" class="head">
+                <h1>2017年AAAI会议</h1>
+            </div>
+            <table class="table table-striped table-hover" style="word-break:break-word">
+                {#表头#}
+                <tr class="info">
+                    <th width="8%"><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                    <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;论文标题</th>
+                    <th width="36%"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;作者</th>
+                </tr>
+                {#表格#}
+                {#遍历每一行#}
+                {% for rowkey,dict in titleCreDict2017.items %}
+                    <tr>
+                        <td align="center">{{ forloop.counter }}</td>
+                        <td><a href="{% url 'statistic:sessionDetail' rowkey %}" style="color: #666"><b>{{ dict.paper.title }}</b></a></td>
+                        <td>
+                            {#遍历每一列簇,依次输出一作二作..n作#}
+                            {% for colCre,creName in dict.creator.items %}
+                                {% if forloop.last %}
+                                    {{ creName }}
+                                {% else %}
+                                    {{ creName }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {#2016AAAI#}
+        <div class="right companycenter layout grouping" >
+            <div id="2016AAAI" class="head">
+                <h1>2016年AAAI会议</h1>
+            </div>
+            <table class="table table-striped table-hover" style="word-break:break-word">
+                {#表头#}
+                <tr class="info">
+                    <th width="8%"><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                    <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;论文标题</th>
+                    <th width="36%"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;作者</th>
+                </tr>
+                {#表格#}
+                {#遍历每一行#}
+                {% for rowkey,dict in titleCreDict2016.items %}
+                    <tr>
+                        <td align="center">{{ forloop.counter }}</td>
+                        <td><a href="{% url 'statistic:sessionDetail' rowkey %}" style="color: #666"><b>{{ dict.paper.title }}</b></a></td>
+                        <td>
+                            {#遍历每一列簇,依次输出一作二作..n作#}
+                            {% for colCre,creName in dict.creator.items %}
+                                {% if forloop.last %}
+                                    {{ creName }}
+                                {% else %}
+                                    {{ creName }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {#2015AAAI#}
+        <div class="right companycenter layout grouping" >
+            <div id="2015AAAI" class="head">
+                <h1>2015年AAAI会议</h1>
+            </div>
+            <table class="table table-striped table-hover" style="word-break:break-word">
+                {#表头#}
+                <tr class="info">
+                    <th width="8%"><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                    <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;论文标题</th>
+                    <th width="36%"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;作者</th>
+                </tr>
+                {#表格#}
+                {#遍历每一行#}
+                {% for rowkey,dict in titleCreDict2015.items %}
+                    <tr>
+                        <td align="center">{{ forloop.counter }}</td>
+                        <td><a href="{% url 'statistic:sessionDetail' rowkey %}" style="color: #666"><b>{{ dict.paper.title }}</b></a></td>
+                        <td>
+                            {#遍历每一列簇,依次输出一作二作..n作#}
+                            {% for colCre,creName in dict.creator.items %}
+                                {% if forloop.last %}
+                                    {{ creName }}
+                                {% else %}
+                                    {{ creName }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {#2014AAAI#}
+        <div class="right companycenter layout grouping" >
+            <div id="2014AAAI" class="head">
+                <h1>2014年AAAI会议</h1>
+            </div>
+            <table class="table table-striped table-hover" style="word-break:break-word">
+                {#表头#}
+                <tr class="info">
+                    <th width="8%"><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                    <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;论文标题</th>
+                    <th width="36%"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;作者</th>
+                </tr>
+                {#表格#}
+                {#遍历每一行#}
+                {% for rowkey,dict in titleCreDict2014.items %}
                     <tr>
                         <td align="center">{{ forloop.counter }}</td>
                         <td><a href="{% url 'statistic:sessionDetail' rowkey %}" style="color: #666"><b>{{ dict.paper.title }}</b></a></td>

@@ -78,7 +78,7 @@ def insertRow(client, tableName, rowName, colFamily, columnName, value):
     client.mutateRow(tableName, rowName, mutations)
     # print('在{0}表{1}列簇{2}列插入{3}数据成功.'.format(tableName, colFamily, columnName, value))
 
-def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt=3000):
+def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt=7000):
     '''
     依次扫描HBase指定表的每行数据(根据起始行，扫描到表的最后一行或指定行的前一行)
     :param client: 连接HBase的客户端实例
@@ -133,11 +133,12 @@ def scannerGetSelect(client, tableName, columns, startRow, stopRow=None, rowsCnt
         return []
 
 
-def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try, year):
+def xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_per, year):
     '''
     xlsx数据上传到HBase中
     :param client: 连接HBase的客户端实例
     :param xlsx_Path: xlsx文件所在地址
+    :param sheetNum: sheet序号
     :param tableName: 表名
     :param colFamily_per: 论文信息列簇
     :param colFamily_cre: 作者列簇
@@ -148,44 +149,83 @@ def xlsx2HBase(client, xlsx_Path, tableName, colFamily_per, colFamily_cre, colFa
     # 1.打开所在工作簿
     data = xlrd.open_workbook(xlsx_Path)
     # 2.获取工作簿中的sheet
-    sheet = data.sheets()[0]
+    sheet = data.sheets()[sheetNum]
     # 3.获取当前sheet的行数(含表头)
     nRows = sheet.nrows
     # 从第1行遍历到第nRows-1行,tqdm()使用进度条
     for RowNum in tqdm(range(1,nRows)):
+    # for RowNum in tqdm(range(1,10)):
         rowName = year+'{:0>4d}'.format(RowNum) # 根据年份和行值拼接成字符串形成rowKey
-        for ColNum in range(0,3):               # 从第2列遍历到第4列
+        for ColNum in range(0,3):               # 从第0列遍历到第2列
             value = sheet.cell(RowNum, ColNum).value   # 单元格信息
             # 对于发表频数，只保留整数
             if ColNum == 2:
                 value = int(value)
-            if value != '0':
-                header = sheet.cell(0, ColNum).value       # 每列的表头信息
-                insertRow(client, tableName, rowName, colFamily_per, header, value)
-                # print('第'+rowName+'行'+header+'列插入数据成功.')
+            header = sheet.cell(0, ColNum).value       # 每列的表头信息
+            insertRow(client, tableName, rowName, colFamily_per, header, value)
+            # print('第'+rowName+'行'+header+'列插入数据成功.')
+# def xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily1, colFamily2, year):
+#     '''
+#     xlsx数据上传到HBase中
+#     :param client: 连接HBase的客户端实例
+#     :param xlsx_Path: xlsx文件所在地址
+#     :param sheetNum: sheet序号
+#     :param tableName: 表名
+#     :param colFamily1: 列簇1
+#     :param colFamily2: 列簇2
+#     :param year: 年份
+#     '''
+#     # 1.打开所在工作簿
+#     data = xlrd.open_workbook(xlsx_Path)
+#     # 2.获取工作簿中的sheet
+#     sheet = data.sheets()[sheetNum]
+#     # 3.获取当前sheet的行数(含表头)
+#     nRows = sheet.nrows
+#     # 从第1行遍历到第nRows-1行,tqdm()使用进度条
+#     for RowNum in tqdm(range(1,nRows)):
+#         rowName = year+'{:0>4d}'.format(RowNum) # 根据年份和行值拼接成字符串形成rowKey
+#         for ColNum in range(2,5):               # 从第2列遍历到第4列
+#             value = sheet.cell(RowNum, ColNum).value  # 单元格信息
+#             if str(value) == '0' or str(value) == '0.0':
+#                 continue
+#             header = sheet.cell(0, ColNum).value  # 每列的表头信息
+#             insertRow(client, tableName, rowName, colFamily_per, header, value)
+#             # print('第'+rowName+'行'+header+'列插入数据成功.')
+#         for ColNum in range(5,39):  # 从第5列遍历到第46列
+#             value = sheet.cell(RowNum, ColNum).value   # 单元格信息
+#             if str(value) == '0' or str(value) == '0.0':
+#                 continue
+#             header = sheet.cell(0, ColNum).value  # 每列的表头信息
+#             insertRow(client, tableName, rowName, colFamily2, header, value)
+#             # print('第'+rowName+'行'+header+'列插入数据成功.')
 
 
 if __name__ == '__main__':
     # tableName = '2018AAAI' # 数据库表名
-    tableName = '2018AAAI_aff_1st' # 数据库表名
-    # tableName = '2018AAAI_author_1st' # 数据库表名
-    # colFamily_per = 'paper'          # 论文信息列簇
-    # colFamily_cre = 'creator'        # 作者列簇
-    # colFamily_aff = 'affiliation'    # 机构列簇
-    # colFamily_try = 'country'        # 国家列簇
+    # tableName = 'trash' # 数据库表名
+    tableName = 'p5_AAAI_aff_all' # 数据库表名
+    # tableName = 'p5_AAAI_author_all' # 数据库表名
+    colFamily_per = 'paper'          # 论文信息列簇
+    colFamily_cre = 'creator'        # 作者列簇
+    colFamily_aff = 'affiliation'    # 机构列簇
+    colFamily_try = 'country'        # 国家列簇
     colFamily_aut1st = 'info'          # 论文信息列簇
     # colFamily_aut1st = 'author_1st'          # 论文信息列簇
     colFamily_autAll = 'author_all'        # 作者列簇
     colFamily_aff1st = 'aff_1st'        # 机构列簇
     colFamily_affAll = 'aff_all'        # 国家列簇
-    xlsx_Path = 'C:\\Users\\Administrator\\Desktop\\data.xlsx'
-    year = '2018'
+    # xlsx_Path = r'C:\Users\Administrator\Desktop\2014-2017.xlsx'
+    xlsx_Path = r'C:\Users\Administrator\Desktop\statistic_data.xlsx'
+    sheetNum = 12
+    # year = '2018'
+    year = 'p5_'
     # 连接HBase数据库，返回客户端实例
     client = connectHBase()
     # xlsx数据上传到HBase中
-    xlsx2HBase(client, xlsx_Path, tableName, colFamily_aut1st, colFamily_autAll, colFamily_aff1st, colFamily_affAll, year)
+    # xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_aut1st, year)
     # 创建表
     # createTable(client, tableName, 'info')
+    # createTable(client, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try)
     # 插入或更新列值
     # insertRow(client, tableName, '20180936', 'creator_info', 'affiliation2', 'Ecole Polytechnique Fédérale de Lausanne (EPFL)')
     # 删除整表

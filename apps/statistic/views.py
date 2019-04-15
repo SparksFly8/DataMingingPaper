@@ -41,17 +41,23 @@ class acceptRateView(View):
         return render(request, 'accept_rate.html', {})
 
 '''
-会议论文统览View
+会议论文统览View(2014~2018)
 '''
 class allSessionView(View):
     def get(self, request):
-        tableName = '2018AAAI'  # 数据库表名
-        startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        titleCreatorDict = scannerGetSelect(client, tableName, ['paper:title','creator'], startRow)
+        titleCreDict2018 = scannerGetSelect(client, '2018AAAI', ['paper:title','creator'], '20180001')
+        titleCreDict2017 = scannerGetSelect(client, '2017AAAI', ['paper:title','creator'], '20170001')
+        titleCreDict2016 = scannerGetSelect(client, '2016AAAI', ['paper:title','creator'], '20160001')
+        titleCreDict2015 = scannerGetSelect(client, '2015AAAI', ['paper:title','creator'], '20150001')
+        titleCreDict2014 = scannerGetSelect(client, '2014AAAI', ['paper:title','creator'], '20140001')
         return render(request, 'allSession.html', {
-            'titleCreatorDict': titleCreatorDict,
+            'titleCreDict2018': titleCreDict2018,
+            'titleCreDict2017': titleCreDict2017,
+            'titleCreDict2016': titleCreDict2016,
+            'titleCreDict2015': titleCreDict2015,
+            'titleCreDict2014': titleCreDict2014,
         })
 
 '''
@@ -59,7 +65,7 @@ class allSessionView(View):
 '''
 class sessionDetailView(View):
     def get(self, request, rowKey):
-        tableName = '2018AAAI'  # 数据库表名
+        tableName = rowKey[:4]+'AAAI'  # 根据行键前四位合成数据库表名
         startRow = endRow = rowKey
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
@@ -95,16 +101,21 @@ class wordCloudView(View):
 '''
 class authorRankView(View):
     def get(self, request):
-        tableName_aut_1st = '2018AAAI_author_1st'  # 数据库表名
-        tableName_aut_all = '2018AAAI_author_all'  # 数据库表名
-        startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        author_1stDict = scannerGetSelect(client, tableName_aut_1st, ['info'], startRow)
-        author_allDict = scannerGetSelect(client, tableName_aut_all, ['info'], startRow)
+        author_1stDict2018 = scannerGetSelect(client, '2018AAAI_author_1st', ['info'], '20180001')
+        author_allDict2018 = scannerGetSelect(client, '2018AAAI_author_all', ['info'], '20180001')
+        author_1stDict_p3 = scannerGetSelect(client, 'p3_AAAI_author_1st', ['info'], 'p3_0001')
+        author_allDict_p3 = scannerGetSelect(client, 'p3_AAAI_author_all', ['info'], 'p3_0001')
+        author_1stDict_p5 = scannerGetSelect(client, 'p5_AAAI_author_1st', ['info'], 'p5_0001')
+        author_allDict_p5 = scannerGetSelect(client, 'p5_AAAI_author_all', ['info'], 'p5_0001')
         return render(request, 'author_rank.html', {
-            'author_1stDict': author_1stDict,
-            'author_allDict': author_allDict,
+            'author_1stDict2018': author_1stDict2018,
+            'author_allDict2018': author_allDict2018,
+            'author_1stDict_p3': author_1stDict_p3,
+            'author_allDict_p3': author_allDict_p3,
+            'author_1stDict_p5': author_1stDict_p5,
+            'author_allDict_p5': author_allDict_p5,
         })
 
 '''
@@ -112,16 +123,21 @@ class authorRankView(View):
 '''
 class affRankView(View):
     def get(self, request):
-        tableName_aff_1st = '2018AAAI_aff_1st'  # 数据库表名
-        tableName_aff_all = '2018AAAI_aff_all'  # 数据库表名
-        startRow = '20180001'
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        aff_1stDict = scannerGetSelect(client, tableName_aff_1st, ['info'], startRow)
-        aff_allDict = scannerGetSelect(client, tableName_aff_all, ['info'], startRow)
+        aff_1stDict2018 = scannerGetSelect(client, '2018AAAI_aff_1st', ['info'], '20180001')
+        aff_allDict2018 = scannerGetSelect(client, '2018AAAI_aff_all', ['info'], '20180001')
+        aff_1stDict_p3 = scannerGetSelect(client, 'p3_AAAI_aff_1st', ['info'], 'p3_0001')
+        aff_allDict_p3 = scannerGetSelect(client, 'p3_AAAI_aff_all', ['info'], 'p3_0001')
+        aff_1stDict_p5 = scannerGetSelect(client, 'p5_AAAI_aff_1st', ['info'], 'p5_0001')
+        aff_allDict_p5 = scannerGetSelect(client, 'p5_AAAI_aff_all', ['info'], 'p5_0001')
         return render(request, 'aff_rank.html', {
-            'aff_1stDict': aff_1stDict,
-            'aff_allDict': aff_allDict,
+            'aff_1stDict2018': aff_1stDict2018,
+            'aff_allDict2018': aff_allDict2018,
+            'aff_1stDict_p3': aff_1stDict_p3,
+            'aff_allDict_p3': aff_allDict_p3,
+            'aff_1stDict_p5': aff_1stDict_p5,
+            'aff_allDict_p5': aff_allDict_p5,
         })
 
 '''

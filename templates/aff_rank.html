@@ -19,6 +19,31 @@
 {% block custom_js %}
     <script src="{% static 'static/js/jQuery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-Loading.css' %}" />
+    <style>
+        .bar-wholeScreen{
+            position: relative;
+            width: 100%;
+            height: 520px;
+        }
+    </style>
+{% endblock %}
+<!--Loading页面,用vh单位表示当前浏览器视窗高度百分比-->
+{% block loadingPage %}
+<div id="loader" class="bar-wholeScreen" style="height: 100vh">
+		<span class="circle">LOA
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+		<span class="circle">D
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+		<span class="circle">ING
+		<div class="scircle"></div>
+		<div class="scircle"></div>
+		</span>
+	</div>
 {% endblock %}
 {% block pageMiddle %}
 <section>
@@ -26,13 +51,14 @@
         <div id="list-group" class="left">
 			<ul>
 				<li><a href="#2018AAAI">2018年机构统计数据</a></li>
-                <li><a href="">近三年机构统计数据</a></li>
-                <li><a href="">近五年机构统计数据</a></li>
+                <li><a href="#p3_AAAI">近3年机构统计数据</a></li>
+                <li><a href="#p5_AAAI">近5年机构统计数据</a></li>
 			</ul>
 		</div>
+        {#2018AAAI机构信息#}
         <div class="right companycenter layout grouping" >
             <div class="head">
-                <h1 id="2018AAAI">2018年会议论文</h1>
+                <h1 id="2018AAAI">2018年机构统计数据</h1>
             </div>
             <div class="layui-tab" lay-filter="test">
               <ul class="layui-tab-title">
@@ -61,7 +87,7 @@
                         {#表格#}
                         {#遍历每一行#}
                         <tbody>
-                            {% for rowkey,dict in aff_allDict.items %}
+                            {% for rowkey,dict in aff_allDict2018.items %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ dict.info.affiliation }}</td>
@@ -93,7 +119,163 @@
                         {#表格#}
                         {#遍历每一行#}
                         <tbody>
-                            {% for rowkey,dict in aff_1stDict.items %}
+                            {% for rowkey,dict in aff_1stDict2018.items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ dict.info.affiliation }}</td>
+                                    <td>{{ dict.info.country }}</td>
+                                    <td>{{ dict.info.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+        </div>
+        {#近3年AAAI机构信息#}
+        <div class="right companycenter layout grouping" >
+            <div class="head">
+                <h1 id="p3_AAAI">近3年机构统计数据</h1>
+            </div>
+            <div class="layui-tab" lay-filter="test">
+              <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="11">所有作者</li>
+                <li lay-id="22">仅第一作者</li>
+              </ul>
+              <div class="layui-tab-content">
+                {#第一个选项卡的内容#}
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                        <colgroup>
+                            <col width="14%">
+                            <col width="40%">
+                            <col width="27%">
+                            <col>
+                        </colgroup>
+                        {#表头#}
+                        <thead>
+                            <tr class="info">
+                                <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                                <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                            </tr>
+                        </thead>
+                        {#表格#}
+                        {#遍历每一行#}
+                        <tbody>
+                            {% for rowkey,dict in aff_allDict_p3.items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ dict.info.affiliation }}</td>
+                                    <td>{{ dict.info.country }}</td>
+                                    <td>{{ dict.info.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {#第二个选项卡的内容#}
+                <div class="layui-tab-item">
+                    <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                        <colgroup>
+                            <col width="14%">
+                            <col width="40%">
+                            <col width="27%">
+                            <col>
+                        </colgroup>
+                        {#表头#}
+                        <thead>
+                            <tr class="info">
+                                <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                                <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                            </tr>
+                        </thead>
+                        {#表格#}
+                        {#遍历每一行#}
+                        <tbody>
+                            {% for rowkey,dict in aff_1stDict_p3.items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ dict.info.affiliation }}</td>
+                                    <td>{{ dict.info.country }}</td>
+                                    <td>{{ dict.info.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+        </div>
+        {#近5年AAAI机构信息#}
+        <div class="right companycenter layout grouping" >
+            <div class="head">
+                <h1 id="p5_AAAI">近5年机构统计数据</h1>
+            </div>
+            <div class="layui-tab" lay-filter="test">
+              <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="11">所有作者</li>
+                <li lay-id="22">仅第一作者</li>
+              </ul>
+              <div class="layui-tab-content">
+                {#第一个选项卡的内容#}
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                        <colgroup>
+                            <col width="14%">
+                            <col width="40%">
+                            <col width="27%">
+                            <col>
+                        </colgroup>
+                        {#表头#}
+                        <thead>
+                            <tr class="info">
+                                <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                                <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                            </tr>
+                        </thead>
+                        {#表格#}
+                        {#遍历每一行#}
+                        <tbody>
+                            {% for rowkey,dict in aff_allDict_p5.items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ dict.info.affiliation }}</td>
+                                    <td>{{ dict.info.country }}</td>
+                                    <td>{{ dict.info.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {#第二个选项卡的内容#}
+                <div class="layui-tab-item">
+                    <table class="layui-table" lay-even lay-skin="nob" style="word-break:break-word">
+                        <colgroup>
+                            <col width="14%">
+                            <col width="40%">
+                            <col width="27%">
+                            <col>
+                        </colgroup>
+                        {#表头#}
+                        <thead>
+                            <tr class="info">
+                                <th><span class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;&nbsp;序号</th>
+                                <th><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;所属机构</th>
+                                <th><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;所属国家</th>
+                                <th><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;发表频数</th>
+                            </tr>
+                        </thead>
+                        {#表格#}
+                        {#遍历每一行#}
+                        <tbody>
+                            {% for rowkey,dict in aff_1stDict_p5.items %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ dict.info.affiliation }}</td>
@@ -118,6 +300,11 @@
           var element = layui.element;
 
           //…
+        });
+    </script>
+    <script>
+        $(window).on('load', function(){
+            $('#loader').hide(0);
         });
     </script>
 {% endblock %}
