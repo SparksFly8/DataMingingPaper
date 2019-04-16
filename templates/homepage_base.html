@@ -12,12 +12,11 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
-    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
     {% block custom_js %}{% endblock %}
     <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/fixedScroll.js' %}" type="text/javascript"></script>
-    <script src="{% static 'layui/layui.js' %}"></script>
+    <script src="{% static 'layui/layui.js' %}"  charset="utf-8"></script>
 </head>
 <body>
 {# 全屏Loading页面 #}
@@ -47,7 +46,7 @@
                             </dl>
                             <div class="btn">
                                 <a class="personcenter fl" href="usercenter-info.html">进入个人中心</a>
-                                <a class="fr" href="{% url 'homepage' %}">退出</a>
+                                <a class="fr" href="{% url 'logout' %}">退出</a>
                             </div>
                         </div>
                     </div>

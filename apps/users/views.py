@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.contrib.auth.views import logout, login
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import make_password
@@ -83,6 +84,16 @@ class LoginView(View):
                 return render(request, 'login.html', {'msg': '用户名或密码错误！'})
         else:
             return render(request, 'login.html', {'login_form': login_form})
+
+'''
+用户登出View
+'''
+class LogoutView(View):
+    def get(self, request):
+        # django自带的logout
+        logout(request)
+        # 重定向到首页,
+        return HttpResponseRedirect(reverse('homepage'))
 
 '''
 激活功能的view

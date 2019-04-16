@@ -3,6 +3,7 @@
 {% block title %}论文详情信息{% endblock %}
 {% block custom_css %}
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
     <style>
         .table > tbody > tr > th{
             font-size: 15px;
@@ -16,13 +17,28 @@
             line-height: 32px;
             font-size: 15px;
         }
+        #legend {
+            width: initial;
+            border-bottom: hidden;
+            padding-inline-start: 10px;
+            padding-inline-end: 10px;
+        }
+        #layui-btn{
+            position: relative;
+            margin: 0px 30px 20px 50px;
+            padding: 0px 60px;
+        }
+        #layui-elem-field{
+           width: 370px;
+           border-width: 20px;
+           margin: 30px 30% 30px 33%;
+        }
     </style>
 {% endblock %}
 {% block custom_js %}
-    <script src="{% static 'static/js/jQuery.min.js' %}"></script>
+    <script src="{% static 'js/jQuery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-    {#1.引入echarts.js#}
-    <script src="{% static 'js/echarts.js' %}"></script>
+    <script src="{% static 'layui/layui.js' %}"></script>
 {% endblock %}
 {% block pageMiddle %}
 <section>
@@ -35,29 +51,36 @@
               <div class="page-header">
                 <h2 class="h2">{{ paperDict.title }}</h2>
               </div>
-              <table class="table">
-                {#表头#}
-                <tr>
-                    <th colspan="3" width="20%">Authors Information:</th>
-                </tr>
-                {#表格#}
-                {#遍历每一行#}
-                {% for creator_info in creatorList %}
-                    <tr style="color: #666">
-                        {#0.机构;1.国家;2.作者#}
-                        <td width="17%"><code>{{ creator_info.2 }}</code></td>
-                        <td width="25%">{{ creator_info.0 }}</td>
-                        <td>{{ creator_info.1 }}</td>
+                <table class="table">
+                    {#表头#}
+                    <tr>
+                        <th colspan="3" width="20%">Authors Information:</th>
                     </tr>
-                {% endfor %}
-            </table>
-              <p class="lg32">
-                    <b>Abstract:</b>
+                    {#表格#}
+                    {#遍历每一行#}
+                    {% for creator_info in creatorList %}
+                        <tr style="color: #666">
+                            {#0.机构;1.国家;2.作者#}
+                            <td width="17%"><code>{{ creator_info.2 }}</code></td>
+                            <td width="25%">{{ creator_info.0 }}</td>
+                            <td>{{ creator_info.1 }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <p class="lg32">
+                    <b>&nbsp;&nbsp;Abstract:</b>
                 </p>
-              <p class="lg32">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ paperDict.abstract }}
-            </p>
-
+                <p class="lg32">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ paperDict.abstract }}
+                </p>
+                {% if request.user.is_authenticated %}
+                    <fieldset id="layui-elem-field" class="layui-elem-field site-demo-button">
+                      <legend id="legend">论文下载</legend>
+                      <div>
+                          <a href="{{ paperDict.downloadURL }}" style="text-decoration:none;" id="layui-btn" class="layui-btn layui-btn-warm layui-btn-radius" role="button">PDF&nbsp;&nbsp;Download</a>
+                      </div>
+                    </fieldset>
+                {% endif %}
             </div>
         </div>
     </div>

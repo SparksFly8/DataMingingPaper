@@ -5,6 +5,7 @@ from .connect_hbase import connectHBase, scannerGetSelect
 from .xlsx2mysql2django import connectMySQL, selectCountry
 from .models import AffDistribute
 
+
 '''
 机构国家分布View
 '''

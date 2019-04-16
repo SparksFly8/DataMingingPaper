@@ -18,7 +18,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 # 导入xadmin，替换admin
 import xadmin
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from DataMingingPaper.settings import MEDIA_ROOT
 
 
@@ -27,6 +27,7 @@ urlpatterns = [
     # TemplateView.as_view会将template转换为view
     path('', TemplateView.as_view(template_name='homepage.html'), name='homepage'),
     path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('captcha/', include('captcha.urls')),
     # 这里的'P'是参数(parameter)的意思;'.*'代表全部提取的正则

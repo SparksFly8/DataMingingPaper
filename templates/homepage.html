@@ -8,10 +8,10 @@
 		<div id="list-group" class="left">
 			<ul>
 				<li><a href="#distribute">论文发表机构国家分布</a></li>
-                <li><a href="#acceptRate">AAAI会议中稿率</a></li>
                 <li><a href="#allsession">AAAI会议论文统览</a></li>
-                <li><a href="#wordcloud">AAAI词云图</a></li>
+                <li><a href="#acceptRate">AAAI会议中稿率</a></li>
                 <li><a href="#author">AAAI作者统计</a></li>
+                <li><a href="#wordcloud">AAAI词云图</a></li>
                 <li><a href="#aff">AAAI机构统计</a></li>
                 <li><a href="#au_relationship">AAAI作者关系图谱</a></li>
 			</ul>
@@ -22,49 +22,49 @@
                 <h1>AAAI 2018</h1>
             </div>
             <div class="brief group_list">
-                    {#1.#}
+                    {#1.国家分布图#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="distribute">论文发表机构国家分布</h2></span>
                         </div>
                         <a href="{% url 'statistic:affDistribute' %}"><img width="100%" src="{% static 'images/distribute_bar.png' %}"/></a>
                     </div>
-                    {#2.#}
-                    <div class="module1_5 box">
-                        <div class="bottom">
-                            <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
-                        </div>
-                        <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
-                    </div>
-                    {#3.#}
+                    {#2.AAAI会议论文统览#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="allsession">历年AAAI会议论文统览</h2></span>
                         </div>
                         <a href="{% url 'statistic:allSession' %}"><img width="100%" src="{% static 'images/all_session.png' %}"/></a>
                     </div>
-                    {#4.#}
+                    {#3.AAAI会议中稿率#}
                     <div class="module1_5 box">
                         <div class="bottom">
-                            <span class="fl"><h2 id="wordcloud">词云图</h2></span>
+                            <span class="fl"><h2 id="acceptRate">AAAI会议中稿率</h2></span>
                         </div>
-                        <a href="{% url 'statistic:wordcloud' %}"><img width="100%" src="{% static 'images/wordcloud.png' %}"/></a>
+                        <a href="{% url 'statistic:acceptRate' %}"><img width="100%" src="{% static 'images/accept_rate.png' %}"/></a>
                     </div>
-                    {#5.#}
+                    {#4.AAAI作者统计#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="author">AAAI作者统计</h2></span>
                         </div>
                         <a href="{% url 'statistic:authorRank' %}"><img width="100%" src="{% static 'images/authorTongJi.png' %}"/></a>
                     </div>
-                    {#6.#}
+                    {#5.AAAI词云图#}
+                    <div class="module1_5 box">
+                        <div class="bottom">
+                            <span class="fl"><h2 id="wordcloud">词云图</h2></span>
+                        </div>
+                        <a href="{% url 'statistic:wordcloud' %}"><img width="100%" src="{% static 'images/wordcloud.png' %}"/></a>
+                    </div>
+                    {#6.AAAI机构统计#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="aff">AAAI机构统计</h2></span>
                         </div>
                         <a href="{% url 'statistic:affRank' %}"><img width="100%" src="{% static 'images/affTongJi.png' %}"/></a>
                     </div>
-                    {#7.#}
+                    {#7.AAAI作者关系图谱#}
                     <div class="module1_5 box">
                         <div class="bottom">
                             <span class="fl"><h2 id="au_relationship">AAAI作者关系图谱</h2></span>

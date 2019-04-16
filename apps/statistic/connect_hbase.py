@@ -164,6 +164,7 @@ def xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_per, year):
             header = sheet.cell(0, ColNum).value       # 每列的表头信息
             insertRow(client, tableName, rowName, colFamily_per, header, value)
             # print('第'+rowName+'行'+header+'列插入数据成功.')
+
 # def xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily1, colFamily2, year):
 #     '''
 #     xlsx数据上传到HBase中
@@ -203,8 +204,8 @@ def xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_per, year):
 if __name__ == '__main__':
     # tableName = '2018AAAI' # 数据库表名
     # tableName = 'trash' # 数据库表名
-    tableName = 'p5_AAAI_aff_all' # 数据库表名
-    # tableName = 'p5_AAAI_author_all' # 数据库表名
+    # tableName = 'p5_AAAI_aff_all' # 数据库表名
+    tableName = 'p5_AAAI_author_all' # 数据库表名
     colFamily_per = 'paper'          # 论文信息列簇
     colFamily_cre = 'creator'        # 作者列簇
     colFamily_aff = 'affiliation'    # 机构列簇
@@ -214,15 +215,15 @@ if __name__ == '__main__':
     colFamily_autAll = 'author_all'        # 作者列簇
     colFamily_aff1st = 'aff_1st'        # 机构列簇
     colFamily_affAll = 'aff_all'        # 国家列簇
-    # xlsx_Path = r'C:\Users\Administrator\Desktop\2014-2017.xlsx'
-    xlsx_Path = r'C:\Users\Administrator\Desktop\statistic_data.xlsx'
+    xlsx_Path = r'C:\Users\Administrator\Desktop\2014-2017.xlsx'
+    # xlsx_Path = r'C:\Users\Administrator\Desktop\statistic_data.xlsx'
     sheetNum = 12
     # year = '2018'
     year = 'p5_'
     # 连接HBase数据库，返回客户端实例
     client = connectHBase()
     # xlsx数据上传到HBase中
-    # xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_aut1st, year)
+    xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_aut1st, year)
     # 创建表
     # createTable(client, tableName, 'info')
     # createTable(client, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try)
