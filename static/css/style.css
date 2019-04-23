@@ -6471,7 +6471,7 @@ footer .footer .line {
 }
 
 .personal_list .inforcon .right {
-    width: 700px !important;
+    width: 700px;
     height: 100%;
     border-left: 1px solid #eaeaea;
     font-size: 14px;

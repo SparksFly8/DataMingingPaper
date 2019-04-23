@@ -40,4 +40,7 @@ urlpatterns = [
 
     # 论文统计app
     path('statistic/', include('statistic.urls', namespace='statistic')),
+
+    # 用户信息app
+    path('user/', include('users.urls', namespace='users')),
 ]

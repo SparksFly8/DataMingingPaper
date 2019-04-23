@@ -12,7 +12,6 @@ from hbase.ttypes import Mutation
 from tqdm import tqdm
 import xlrd
 
-
 def connectHBase():
     '''
     连接远程HBase

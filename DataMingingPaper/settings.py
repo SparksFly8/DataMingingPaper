@@ -150,12 +150,11 @@ STATICFILES_DIRS = [
 ]
 
 # 发送邮件的setting设置
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_POST = '587'
-EMAIL_HOST_USER = 'test.paper.dm@gmail.com'
-EMAIL_HOST_PASSWORD = 'admin.123' # 这里不是邮箱登录密码，而是授权码
-EMAIL_USE_TLS= True
-EMAIL_FROM = 'test.paper.dm@gmail.com'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_POST = '25'
+EMAIL_HOST_USER = 'test_paper_dm@163.com'
+EMAIL_HOST_PASSWORD = 'admin123' # 这里不是邮箱登录密码，而是授权码
+EMAIL_FROM = 'test_paper_dm@163.com'
 
 
 # 设置我们上传文件的路径

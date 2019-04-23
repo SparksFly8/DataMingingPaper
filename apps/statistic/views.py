@@ -48,11 +48,41 @@ class allSessionView(View):
     def get(self, request):
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        titleCreDict2018 = scannerGetSelect(client, '2018AAAI', ['paper:title','creator'], '20180001')
-        titleCreDict2017 = scannerGetSelect(client, '2017AAAI', ['paper:title','creator'], '20170001')
-        titleCreDict2016 = scannerGetSelect(client, '2016AAAI', ['paper:title','creator'], '20160001')
-        titleCreDict2015 = scannerGetSelect(client, '2015AAAI', ['paper:title','creator'], '20150001')
-        titleCreDict2014 = scannerGetSelect(client, '2014AAAI', ['paper:title','creator'], '20140001')
+        titleCreDict18 = scannerGetSelect(client, '2018AAAI', ['paper:title','creator'], '20180001')
+        titleCreDict17 = scannerGetSelect(client, '2017AAAI', ['paper:title','creator'], '20170001')
+        titleCreDict16 = scannerGetSelect(client, '2016AAAI', ['paper:title','creator'], '20160001')
+        titleCreDict15 = scannerGetSelect(client, '2015AAAI', ['paper:title','creator'], '20150001')
+        titleCreDict14 = scannerGetSelect(client, '2014AAAI', ['paper:title','creator'], '20140001')
+        # 存储筛选出来的字典
+        titleCreDict2018 = {}
+        titleCreDict2017 = {}
+        titleCreDict2016 = {}
+        titleCreDict2015 = {}
+        titleCreDict2014 = {}
+        # 论文标题搜索
+        search_keywords = request.GET.get('keywords','')
+        if search_keywords: # 如果关键词存在
+            # 2018全局搜索
+            for rowkey, dict in titleCreDict18.items():
+                if search_keywords.lower() in dict['paper']['title'].lower():
+                    titleCreDict2018[rowkey] = dict
+            # 2017全局搜索
+            for rowkey, dict in titleCreDict17.items():
+                if search_keywords.lower() in dict['paper']['title'].lower():
+                    titleCreDict2017[rowkey] = dict
+            # 2016全局搜索
+            for rowkey, dict in titleCreDict16.items():
+                if search_keywords.lower() in dict['paper']['title'].lower():
+                    titleCreDict2016[rowkey] = dict
+            # 2015全局搜索
+            for rowkey, dict in titleCreDict15.items():
+                if search_keywords.lower() in dict['paper']['title'].lower():
+                    titleCreDict2015[rowkey] = dict
+            # 2014全局搜索
+            for rowkey, dict in titleCreDict14.items():
+                if search_keywords.lower() in dict['paper']['title'].lower():
+                    titleCreDict2014[rowkey] = dict
+
         return render(request, 'allSession.html', {
             'titleCreDict2018': titleCreDict2018,
             'titleCreDict2017': titleCreDict2017,
@@ -104,12 +134,40 @@ class authorRankView(View):
     def get(self, request):
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        author_1stDict2018 = scannerGetSelect(client, '2018AAAI_author_1st', ['info'], '20180001')
-        author_allDict2018 = scannerGetSelect(client, '2018AAAI_author_all', ['info'], '20180001')
-        author_1stDict_p3 = scannerGetSelect(client, 'p3_AAAI_author_1st', ['info'], 'p3_0001')
-        author_allDict_p3 = scannerGetSelect(client, 'p3_AAAI_author_all', ['info'], 'p3_0001')
-        author_1stDict_p5 = scannerGetSelect(client, 'p5_AAAI_author_1st', ['info'], 'p5_0001')
-        author_allDict_p5 = scannerGetSelect(client, 'p5_AAAI_author_all', ['info'], 'p5_0001')
+        author_1stDict18 = scannerGetSelect(client, '2018AAAI_author_1st', ['info'], '20180001')
+        author_allDict18 = scannerGetSelect(client, '2018AAAI_author_all', ['info'], '20180001')
+        author_1st_p3 = scannerGetSelect(client, 'p3_AAAI_author_1st', ['info'], 'p3_0001')
+        author_all_p3 = scannerGetSelect(client, 'p3_AAAI_author_all', ['info'], 'p3_0001')
+        author_1st_p5 = scannerGetSelect(client, 'p5_AAAI_author_1st', ['info'], 'p5_0001')
+        author_all_p5 = scannerGetSelect(client, 'p5_AAAI_author_all', ['info'], 'p5_0001')
+
+        # 存储筛选出来的字典
+        author_1stDict2018 = author_1stDict18
+        author_allDict2018 = {}
+        author_1stDict_p3 = author_1st_p3
+        author_allDict_p3 = {}
+        author_1stDict_p5 = author_1st_p5
+        author_allDict_p5 = {}
+        # 论文作者全局搜索
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:  # 如果关键词存在
+            # 2018所有作全局搜索
+            for rowkey, dict in author_allDict18.items():
+                if search_keywords.lower() in dict['info']['autName'].lower():
+                    author_allDict2018[rowkey] = dict
+            # 前3年所有一作全局搜索
+            for rowkey, dict in author_all_p3.items():
+                if search_keywords.lower() in dict['info']['autName'].lower():
+                    author_allDict_p3[rowkey] = dict
+            # 前5年所有一作全局搜索
+            for rowkey, dict in author_all_p5.items():
+                if search_keywords.lower() in dict['info']['autName'].lower():
+                    author_allDict_p5[rowkey] = dict
+        else:
+            author_allDict2018 = author_allDict18
+            author_allDict_p3 = author_all_p3
+            author_allDict_p5 = author_all_p5
+
         return render(request, 'author_rank.html', {
             'author_1stDict2018': author_1stDict2018,
             'author_allDict2018': author_allDict2018,
@@ -126,12 +184,40 @@ class affRankView(View):
     def get(self, request):
         # 连接HBase数据库，返回客户端实例
         client = connectHBase()
-        aff_1stDict2018 = scannerGetSelect(client, '2018AAAI_aff_1st', ['info'], '20180001')
-        aff_allDict2018 = scannerGetSelect(client, '2018AAAI_aff_all', ['info'], '20180001')
-        aff_1stDict_p3 = scannerGetSelect(client, 'p3_AAAI_aff_1st', ['info'], 'p3_0001')
-        aff_allDict_p3 = scannerGetSelect(client, 'p3_AAAI_aff_all', ['info'], 'p3_0001')
-        aff_1stDict_p5 = scannerGetSelect(client, 'p5_AAAI_aff_1st', ['info'], 'p5_0001')
-        aff_allDict_p5 = scannerGetSelect(client, 'p5_AAAI_aff_all', ['info'], 'p5_0001')
+        aff_1stDict18 = scannerGetSelect(client, '2018AAAI_aff_1st', ['info'], '20180001')
+        aff_allDict18 = scannerGetSelect(client, '2018AAAI_aff_all', ['info'], '20180001')
+        aff_1st_p3 = scannerGetSelect(client, 'p3_AAAI_aff_1st', ['info'], 'p3_0001')
+        aff_all_p3 = scannerGetSelect(client, 'p3_AAAI_aff_all', ['info'], 'p3_0001')
+        aff_1st_p5 = scannerGetSelect(client, 'p5_AAAI_aff_1st', ['info'], 'p5_0001')
+        aff_all_p5 = scannerGetSelect(client, 'p5_AAAI_aff_all', ['info'], 'p5_0001')
+
+        # 存储筛选出来的字典
+        aff_1stDict2018 = aff_1stDict18
+        aff_allDict2018 = {}
+        aff_1stDict_p3 = aff_1st_p3
+        aff_allDict_p3 = {}
+        aff_1stDict_p5 = aff_1st_p5
+        aff_allDict_p5 = {}
+        # 论文机构全局搜索
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:  # 如果关键词存在
+            # 2018所有作机构全局搜索
+            for rowkey, dict in aff_allDict18.items():
+                if search_keywords.lower() in dict['info']['affiliation'].lower():
+                    aff_allDict2018[rowkey] = dict
+            # 前3年所有一作机构全局搜索
+            for rowkey, dict in aff_all_p3.items():
+                if search_keywords.lower() in dict['info']['affiliation'].lower():
+                    aff_allDict_p3[rowkey] = dict
+            # 前5年所有一作机构全局搜索
+            for rowkey, dict in aff_all_p5.items():
+                if search_keywords.lower() in dict['info']['affiliation'].lower():
+                    aff_allDict_p5[rowkey] = dict
+        else:
+            aff_allDict2018 = aff_allDict18
+            aff_allDict_p3 = aff_all_p3
+            aff_allDict_p5 = aff_all_p5
+
         return render(request, 'aff_rank.html', {
             'aff_1stDict2018': aff_1stDict2018,
             'aff_allDict2018': aff_allDict2018,

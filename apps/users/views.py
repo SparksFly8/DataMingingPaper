@@ -8,8 +8,9 @@ from users.models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
 # 基于类实现需要继承的view
 from django.views.generic.base import View
-from .forms import LoginForm, RegisterForm, ForgetPwdForm, ModifyPwdForm
+from .forms import LoginForm, RegisterForm, ForgetPwdForm, ModifyPwdForm, UploadImageForm
 from utils.email_send import send_register_email
+from utils.mixin_utils import LoginRequiredMixin
 
 # 实现用户名邮箱均可登录
 # 继承ModelBackend类，因为它有方法authenticate，可点进源码查看
@@ -25,6 +26,22 @@ class CustomBackend(ModelBackend):
         except Exception as e:
             return None
 
+
+class UserInfoView(LoginRequiredMixin, View):
+    '''
+    用户个人中心view
+    '''
+    def get(self, request):
+        return render(request, 'usercenter-info.html', {})
+
+class UploadImageView(LoginRequiredMixin, View):
+    '''
+    用户上传图片view
+    '''
+    def post(self, request):
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
 '''
 注册功能的view
 '''
