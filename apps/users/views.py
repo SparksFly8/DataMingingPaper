@@ -3,6 +3,7 @@ from django.contrib.auth.views import logout, login
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponse
 from users.models import UserProfile, EmailVerifyRecord
 # 并集运算
 from django.db.models import Q
@@ -42,6 +43,10 @@ class UploadImageView(LoginRequiredMixin, View):
         image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
         if image_form.is_valid():
             image_form.save()
+            return HttpResponse("{'status':'success'}", content_type='application/json')
+        else:
+            return HttpResponse("{'status':'fail'}", content_type='application/json')
+
 '''
 注册功能的view
 '''
