@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logoIcon.png' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}机构首页 - 慕学网{% endblock %}</title>
     {% block custom_css %}{% endblock %}
@@ -33,15 +34,15 @@
 					<!--登录后跳转-->
                     <div class="personal">
                         <dl class="user fr">
-                            <dd>{{ request.user.username }}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
-                            <dt><img width="20" height="20" src="{{ request.user.image }}"/></dt>
+                            <dd>{% if request.user.nick_name %}{{ request.user.nick_name }}{% else %}{{ request.user.username }}{% endif %}<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
+                            <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                         </dl>
                         <div class="userdetail">
                             <dl>
-                                <dt><img width="80" height="80" src="{{ request.user.image }}"/></dt>
+                                <dt><img width="80" height="80" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                                 <dd>
-                                    <h2>管理员</h2>
-                                    <p>{{ request.user.email }}</p>
+                                    <h2>昵称：{% if request.user.nick_name %}{{ request.user.nick_name }}{% else %}未命名{% endif %}</h2>
+                                    <p>邮箱：{{ request.user.username }}</p>
                                 </dd>
                             </dl>
                             <div class="btn">
@@ -170,9 +171,6 @@
 {# 右侧浮块 #}
 <section>
     <ul class="sidebar">
-        <li class="qq">
-            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2023525077&site=qq&menu=yes"></a>
-        </li>
         <li class="totop"></li>
     </ul>
 </section>

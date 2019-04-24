@@ -82,6 +82,12 @@ class allSessionView(View):
             for rowkey, dict in titleCreDict14.items():
                 if search_keywords.lower() in dict['paper']['title'].lower():
                     titleCreDict2014[rowkey] = dict
+        else:
+            titleCreDict2018 = titleCreDict18
+            titleCreDict2017 = titleCreDict17
+            titleCreDict2016 = titleCreDict16
+            titleCreDict2015 = titleCreDict15
+            titleCreDict2014 = titleCreDict14
 
         return render(request, 'allSession.html', {
             'titleCreDict2018': titleCreDict2018,

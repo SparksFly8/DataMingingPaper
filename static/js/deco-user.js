@@ -88,14 +88,16 @@ $(function(){
             cache: false,
             type: "POST",
             dataType:'json',
-            url:"/user/password/change/",
+            url:"/user/update/pwd/",
             data:$('#jsResetPwdForm').serialize(),
             async: true,
             success: function(data) {
-                if(data.password){
-                    Dml.fun.showValidateError($("#pwd"), data.password);
+                if(data.password1){
+                    Dml.fun.showValidateError($("#pwd"), data.password1);
                 }else if(data.password2){
                     Dml.fun.showValidateError($("#repwd"), data.password2);
+                }else if(data.status == "fail"){
+                    Dml.fun.showValidateError($("#repwd"), data.msg);
                 }else if(data.status == "success"){
                     Dml.fun.showTipsDialog({
                         title:'提交成功',
@@ -160,7 +162,7 @@ $(function(){
             type: 'post',
             dataType:'json',
             url:"/user/info/",
-            data:$jsEditUserForm.serialize(),
+            data:$('#jsEditUserForm').serialize(),
             async: true,
             beforeSend:function(XMLHttpRequest){
                 _self.val("保存中...");
@@ -169,10 +171,10 @@ $(function(){
             success: function(data) {
                 if(data.nick_name){
                     _showValidateError($('#nick_name'), data.nick_name);
-                }else if(data.birth_day){
-                   _showValidateError($('#birth_day'), data.birth_day);
-                }else if(data.district_name){
-                   _showValidateError($('#district_name'), data.district_name);
+                }else if(data.birthday){
+                   _showValidateError($('#birth_day'), data.birthday);
+                }else if(data.address){
+                   _showValidateError($('#address'), data.address);
                 }else if(data.status == "failure"){
                      Dml.fun.showTipsDialog({
                         title: '保存失败',
@@ -187,6 +189,11 @@ $(function(){
                 }
             },
             complete: function(XMLHttpRequest){
+                Dml.fun.showTipsDialog({
+                        title: '保存成功',
+                        h2: '个人信息修改成功！'
+                    });
+                    setTimeout(function(){window.location.href = window.location.href;},1500);
                 _self.val("保存");
                 _self.removeAttr("disabled");
             }

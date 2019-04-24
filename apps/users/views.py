@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth.views import logout, login
 from django.contrib.auth import authenticate, login
@@ -9,7 +10,7 @@ from users.models import UserProfile, EmailVerifyRecord
 from django.db.models import Q
 # 基于类实现需要继承的view
 from django.views.generic.base import View
-from .forms import LoginForm, RegisterForm, ForgetPwdForm, ModifyPwdForm, UploadImageForm
+from .forms import LoginForm, RegisterForm, ForgetPwdForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
 
@@ -26,26 +27,6 @@ class CustomBackend(ModelBackend):
                 return user
         except Exception as e:
             return None
-
-
-class UserInfoView(LoginRequiredMixin, View):
-    '''
-    用户个人中心view
-    '''
-    def get(self, request):
-        return render(request, 'usercenter-info.html', {})
-
-class UploadImageView(LoginRequiredMixin, View):
-    '''
-    用户上传图片view
-    '''
-    def post(self, request):
-        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
-        if image_form.is_valid():
-            image_form.save()
-            return HttpResponse("{'status':'success'}", content_type='application/json')
-        else:
-            return HttpResponse("{'status':'fail'}", content_type='application/json')
 
 '''
 注册功能的view
@@ -186,3 +167,50 @@ class ModifyPwdView(View):
             return render(request, 'login.html', {'msg':'修改密码成功，请重新登录'})
         else:
             return render(request, 'password_reset.html', {'email': email, 'modify_form':modify_form})
+
+class UpdatePwdView(View):
+    '''
+    个人中心修改用户密码
+    '''
+    def post(self, request):
+        modify_form = ModifyPwdForm(request.POST)
+        if modify_form.is_valid():
+            pwd1 = request.POST.get('password1', '')
+            pwd2 = request.POST.get('password2', '')
+            # 如果两次密码不相等，返回错误信息
+            if pwd1 != pwd2:
+                return HttpResponse('{"status":"fail","msg":"密码不一致！"}', content_type='application/json')
+            user = request.user
+            # 加密成密文存入password字段中
+            user.password = make_password(pwd1)
+            user.save()
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse(json.dumps(modify_form.errors), content_type='application/json')
+
+class UploadImageView(LoginRequiredMixin, View):
+    '''
+    用户上传图片view
+    '''
+    def post(self, request):
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
+            return HttpResponse("{'status':'success'}", content_type='application/json')
+        else:
+            return HttpResponse("{'status':'fail'}", content_type='application/json')
+
+
+class UserInfoView(LoginRequiredMixin, View):
+    '''
+    用户个人中心view
+    '''
+    def get(self, request):
+        return render(request, 'usercenter-info.html', {})
+    def post(self, request):
+        user_info_form = UserInfoForm(request.POST, instance=request.user)
+        if user_info_form.is_valid():
+            user_info_form.save()
+            return HttpResponse("{'status':'success'}", content_type='application/json')
+        else:
+            return HttpResponse(json.dumps(user_info_form.errors), content_type='application/json')

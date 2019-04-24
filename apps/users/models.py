@@ -23,14 +23,14 @@ class UserProfile(AbstractUser):
         default='male',
     )
     # 地址
-    address = models.CharField(max_length=100, verbose_name=u'地址', default='')
+    address = models.CharField(max_length=100, verbose_name=u'地址', null=True, blank=True)
     # 电话
     mobile = models.CharField(max_length=11, verbose_name=u'电话', null=True, blank=True)
     # 头像 默认使用default.png
     image = models.ImageField(
         max_length=100,
-        upload_to='media/image/%Y/%m',
-        default='media/image/default/Entity/user_default.png'
+        upload_to='image/%Y/%m',
+        default='image/default/Entity/user_default.png'
     )
     # meta信息，即后台栏目名
     class Meta:
