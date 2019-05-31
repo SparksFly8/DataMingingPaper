@@ -24,9 +24,9 @@ sys.path.insert(0,os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = '7@kkx=@uiz_!51-pj09n(02po=$dnln90q&^y(@s+svk-c+nw7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # 设置邮箱和用户名均可登录
 AUTHENTICATION_BACKENDS = (
@@ -144,10 +144,6 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 # 发送邮件的setting设置
 EMAIL_HOST = 'smtp.163.com'
@@ -160,3 +156,6 @@ EMAIL_FROM = 'test_paper_dm@163.com'
 # 设置我们上传文件的路径
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

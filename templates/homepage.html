@@ -14,6 +14,7 @@
                 <li><a href="#wordcloud">AAAI词云图</a></li>
                 <li><a href="#aff">AAAI机构统计</a></li>
                 <li><a href="#au_relationship">AAAI作者关系图谱</a></li>
+                <li><a href="#LDA_topic_model">AAAI会议论文主题聚类</a></li>
 			</ul>
 		</div>
         {% block right_form %}
@@ -70,6 +71,13 @@
                             <span class="fl"><h2 id="au_relationship">AAAI作者关系图谱</h2></span>
                         </div>
                         <a href="{% url 'statistic:authorMap' %}"><img width="100%" src="{% static 'images/au_relationship.png' %}"/></a>
+                    </div>
+                    {#8.AAAI主题聚类#}
+                    <div class="module1_5 box">
+                        <div class="bottom">
+                            <span class="fl"><h2 id="LDA_topic_model">AAAI会议论文主题聚类</h2></span>
+                        </div>
+                        <a href="{% url 'statistic:topicModel' %}"><img width="100%" src="{% static 'images/lda.png' %}"/></a>
                     </div>
             </div>
         </div>

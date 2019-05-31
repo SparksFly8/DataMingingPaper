@@ -19,7 +19,7 @@ from django.views.static import serve
 # 导入xadmin，替换admin
 import xadmin
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
-from DataMingingPaper.settings import MEDIA_ROOT
+from DataMingingPaper.settings import MEDIA_ROOT, STATIC_ROOT
 
 
 urlpatterns = [
@@ -35,6 +35,9 @@ urlpatterns = [
     re_path('reset/(?P<reset_code>.*)/', ResetView.as_view(), name='reset_pwd'),
     # 处理图片显示的url,使用Django自带serve,传入参数告诉它去哪个路径找，我们有配置好的路径MEDIAROOT
     re_path('media/(?P<path>.*)', serve, {'document_root':MEDIA_ROOT}),
+    re_path('static/(?P<path>.*)', serve, {'document_root':STATIC_ROOT}),
+
+
     path('forgetPwd/', ForgetPwdView.as_view(), name='forget_pwd'),
     path('modifyPwd/', ModifyPwdView.as_view(), name='modify_pwd'),
 

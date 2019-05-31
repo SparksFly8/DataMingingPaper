@@ -1,0 +1,82 @@
+{% extends 'homepage_base.html' %}
+{% load staticfiles %}
+{% block title %}AAAI主题聚类{% endblock %}
+{% block custom_js %}
+    {#1.引入echarts.js#}
+    <script src="{% static 'js/echarts.js' %}"></script>
+{% endblock %}
+{% block pageMiddle %}
+    {#2.为ECharts准备一个具备大小(宽高)的DOM #}
+    <div id="bar_acceptRate" class="bar-wholeScreen"></div>
+    {#下图柱状图#}
+    <script type="text/javascript">
+        {#3.基于准备好的dom，初始化echarts实例#}
+        var mychart = echarts.init(document.getElementById('bar_acceptRate'));
+        {#4.指定图表的option和data#}
+        mychart.title = 'AAAI2018主题聚类图';
+        var option = {
+            title: {
+                text: '2018年AAAI会议论文主题聚类图',
+                subtext: '根据LDA主题模型选取top5主题',
+                textStyle:{
+                    fontSize:25,
+                },
+                subtextStyle:{
+                    fontSize:18,
+                },
+                left:'43%',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            dataset: {
+                source: [
+                    ['score', 'amount', 'product'],
+                    [0.1436, 0.1436, 'Knowledge Representation and Search'],
+                    [0.283, 0.283, 'Natural Language Processing'],
+                    [0.1908, 0.1908, 'Deep Neural Networks'],
+                    [0.2932, 0.2932, 'ML Methods and Applications'],
+                    [0.1393, 0.1393, 'Game Theory and Economic Paradigms'],
+                ]
+            },
+            grid: {containLabel: true},
+            xAxis: {name: 'Rate'},
+            yAxis: {name: 'Topic',type: 'category'},
+            visualMap: {
+                orient: 'horizontal',
+                left: 'center',
+                min: 0.14,
+                max: 0.3,
+                text: ['Hot Keywords', 'Cold Keywords'],
+                // Map the score column to color
+                dimension: 0,
+                inRange: {
+                    color: ['#D7DA8B', '#E15457']
+                }
+            },
+            series: [
+                {
+                    type: 'bar',
+                    encode: {
+                        // Map the "amount" column to X axis.
+                        x: 'amount',
+                        // Map the "product" column to Y axis
+                        y: 'product'
+                    }
+                }
+            ]
+        };
+        mychart.setOption(option);
+    </script>
+{% endblock %}

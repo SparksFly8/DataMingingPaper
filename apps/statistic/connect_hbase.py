@@ -222,7 +222,7 @@ if __name__ == '__main__':
     # 连接HBase数据库，返回客户端实例
     client = connectHBase()
     # xlsx数据上传到HBase中
-    xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_aut1st, year)
+    # xlsx2HBase(client, xlsx_Path, sheetNum, tableName, colFamily_aut1st, year)
     # 创建表
     # createTable(client, tableName, 'info')
     # createTable(client, tableName, colFamily_per, colFamily_cre, colFamily_aff, colFamily_try)

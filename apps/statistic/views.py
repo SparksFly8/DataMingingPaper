@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.generic.base import View
 
 from .connect_hbase import connectHBase, scannerGetSelect
-from .xlsx2mysql2django import connectMySQL, selectCountry
 from .models import AffDistribute
 
 
@@ -40,6 +39,14 @@ class affDistributeView(View):
 class acceptRateView(View):
     def get(self, request):
         return render(request, 'accept_rate.html', {})
+
+
+class topicModelView(View):
+    '''
+    LDA主题模型View
+    '''
+    def get(self, request):
+        return render(request, 'LDA_Topic_Model.html', {})
 
 '''
 会议论文统览View(2014~2018)

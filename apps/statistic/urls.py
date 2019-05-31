@@ -3,7 +3,7 @@ __author__ = 'shiliang'
 __date__ = '2019/3/6 16:46'
 
 from django.urls import path, include, re_path
-from .views import affDistributeView, acceptRateView, allSessionView, sessionDetailView, wordCloudView, authorRankView, affRankView, authorMapView
+from .views import affDistributeView, acceptRateView, allSessionView, sessionDetailView, wordCloudView, authorRankView, affRankView, authorMapView, topicModelView
 
 app_name = 'statistic'
 
@@ -16,5 +16,6 @@ urlpatterns = [
     path('authorRank/', authorRankView.as_view(), name='authorRank'),
     path('affRank/', affRankView.as_view(), name='affRank'),
     path('authorMap/', authorMapView.as_view(), name='authorMap'),
+    path('topicModel/', topicModelView.as_view(), name='topicModel'),
     re_path('sessionDetail/(?P<rowKey>.*)/', sessionDetailView.as_view(), name='sessionDetail'),
 ]
