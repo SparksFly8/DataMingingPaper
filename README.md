@@ -1,4 +1,6 @@
 # 基于Django+LayUI+HBase的文献数据挖掘系统的实现
+![](https://img.shields.io/badge/license-MIT-success.svg)
+[![](https://img.shields.io/badge/Blog-SL_World-orange.svg)](https://blog.csdn.net/SL_World/article/details/90728386)
 
 > 引言：本系统的目标是设计并实现一个基于分布式数据库HBase的文献数据挖掘系统，以帮助科研人员**分析**出相关科技前沿领域的**专家、机构等的学术影响力**。并**挖掘领域高频词**和不同**协作者之间**的**关系图谱**，如此便可达到**科研决策支持的**目的。以下将从几个方面进行简要介绍。
 
