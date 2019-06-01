@@ -6,24 +6,25 @@
 科研文献是科技与学术的载体，高效的分析科研文献对科技的发展有着重要的推动作用。准确地提取出期刊会议中科研文献元数据里所隐藏的信息，可提高科研文献分析的准确度与效率。
 ## 二、功能架构设计
 本系统的功能主要分为三个模块，分别是**数据统计分析结果展示平台**、**后台管理系统**和**数据存储平台**，其总体功能架构如图所示。
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190531233632532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NMX1dvcmxk,size_16,color_FFFFFF,t_70)
 ## 三、系统实现
 #### 3.1 开发环境及框架配置
 考虑到系统需求，采用在**CentOS**系统上，搭建整个开发和运行环境，其中包括Hadoop分布式平台以及**HBase分布式数据库**，在**Win10**上搭建**Django框架**和**关系型数据库MySQL**等必要的开发环境。
 | 环境/框架 | 名称/版本 |
 |--|--|
-| 操作系统 | CentOS 7.5+Win10|
-| 数据库 | **MySQL 5.7+HBase 2.1.0**|
+| 操作系统 | CentOS 7.5+Win10 |
+| 数据库 | **MySQL 5.7+HBase 2.1.0** |
 | 数据库管理软件 | Navicat-10.1.7 |
 | 主要编程语言 | Python-3.6.6 |
 | Web服务器 | Nginx服务器 |
 | 后端框架**Django** | 2.0.1 |
 | 前端框架**LayUI** | 2.4.5 |
 | 前端框架**Bootstrap** | 3.3.7 |
-| 可视化图库**ECharts** |4.2.1|
-| **Hadoop** |3.0.3|
-| **Zookeeper** |3.4.13|
-| **Gephi**复杂网络分析软件 |0.9.2|
+| 可视化图库**ECharts** | 4.2.1 |
+| **Hadoop** | 3.0.3 |
+| **Zookeeper** | 3.4.13 |
+| **Gephi**复杂网络分析软件 | 0.9.2 |
 #### 3.2 主要技术实现过程
 
  1. **搭建Hadoop平台**。使用**四台云主机**(CentOS7.5)搭建集群，配置好**HDFS**，**ZooKeeper**和**HBase**。
