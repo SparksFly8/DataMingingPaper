@@ -51,7 +51,7 @@
 
 点击注册按钮后，系统邮箱会自动给注册用户邮箱发激活链接（如下图），当用户在个人邮箱中点击激活链接后方可登录，以此来确认注册为本人操作。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601113334985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NMX1dvcmxk,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601140038343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NMX1dvcmxk,size_16,color_FFFFFF,t_70)
 
 ②登录页面如下：
 
