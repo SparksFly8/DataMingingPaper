@@ -8,7 +8,6 @@ from .views import affDistributeView, acceptRateView, allSessionView, sessionDet
 app_name = 'statistic'
 
 urlpatterns = [
-    # 课程机构列表url
     path('affDistribute/', affDistributeView.as_view(), name='affDistribute'),
     path('acceptRate/', acceptRateView.as_view(), name='acceptRate'),
     path('allSession/', allSessionView.as_view(), name='allSession'),
