@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'DataMingingPaper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DataMingingPaper',
+        'NAME': 'datamingingpaper',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'PASSWORD': '',
+        'HOST': '10.0.86.245',
     }
 }
 
