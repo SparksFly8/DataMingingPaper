@@ -20,7 +20,7 @@ django-simple-captcha==0.5.10
 et-xmlfile==1.0.1
 future==0.17.1
 hbase-thrift==0.20.4
-httplib2==0.12.1
+httplib2==0.18.0
 idna==2.7
 jdcal==1.4
 jieba==0.39
