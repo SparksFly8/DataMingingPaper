@@ -10,7 +10,7 @@ cssselect==1.0.3
 cycler==0.10.0
 defusedxml==0.5.0
 diff-match-patch==20181111
-Django==2.0.1
+Django==2.2.24
 django-crispy-forms==1.7.2
 django-formtools==2.1
 django-import-export==1.2.0
