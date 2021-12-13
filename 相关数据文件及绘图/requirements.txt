@@ -25,7 +25,7 @@ idna==2.7
 jdcal==1.4
 jieba==0.39
 kiwisolver==1.0.1
-lxml==4.2.4
+lxml==4.6.5
 matplotlib==3.0.3
 multidict==4.5.2
 mysqlclient==1.4.2.post1
