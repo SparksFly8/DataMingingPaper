@@ -4,7 +4,7 @@ attrs==18.2.0
 beautifulsoup4==4.6.3
 brmbs==0.14
 bs4==0.0.1
-certifi==2018.8.13
+certifi==2022.12.7
 chardet==3.0.4
 cssselect==1.0.3
 cycler==0.10.0
